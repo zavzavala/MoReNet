@@ -1,0 +1,42 @@
+<?php
+
+namespace App\Http\Livewire;
+
+use Livewire\Component;
+use App\Models\User;
+
+class AutorProfileDetails extends Component
+{
+    public $autor;
+
+    public $nome, $usuario, $email;
+   
+    public function mount(){
+        $this->autor = User::find(auth('web')->id());
+        $this->nome = $this->autor->name;
+        $this->usuario = $this->autor->username;
+        $this->email = $this->autor->email;
+        
+    }
+    public function UpdateDetails(){
+        //dd('UpdateDetails');
+        $this->validate([
+            'name'=>'required|string',
+            'username'=>'required|unique:users,username,'.auth('web')->id()
+
+        ],[
+
+        ]);
+
+        User::where('id', auth('web')->id())->update([
+            'name'=>$this->name,
+            'username'=>$this->username
+        ]);
+        $this->emit('updateRefreshAutorProfileHeader');
+        $this->emit('updateTopHeader');
+    }
+    public function render()
+    {
+        return view('livewire.autor-profile-details');
+    }
+}
