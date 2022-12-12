@@ -69,7 +69,7 @@ public $user_id;
             if($done){
                 Mail::send('new-user-email-template', $data, function($message) use ($autor_email, $autor_name){
                     $message->from('zavzavala76@gmail.com', 'Zavala');
-                    $message->to($autor_email,$autor_name)->subject('Credencias');
+                    $message->to($autor_email,$autor_name)->subject('Credenciais');
                 });
 
                 $this->dispatchBrowserEvent('Conta criada com sucesso', 'success');
@@ -85,6 +85,9 @@ public $user_id;
         $this->showToastr('Esta offline, conecte-se a uma rede!', 'warning');
 
         }
+    }
+    public function deleteUser($autor){
+        dd('delete', $autor);
     }
     public function editUser($autor){
         //dd(['sgg', $autor]);

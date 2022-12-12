@@ -30,4 +30,15 @@ class empresa extends Model
         'url',
         'informacao',
     ];
+
+    public function scopeSearch($query, $term){
+
+        $term = "%$term%";
+
+        $query->where(function($query) use ($term){
+            $query->where('empresa', 'like', $term)
+                ->orWhere('tipo_empresa', 'like', $term);
+        });
+        
+    }
 }

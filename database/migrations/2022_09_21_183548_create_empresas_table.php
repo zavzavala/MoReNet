@@ -20,12 +20,12 @@ class CreateEmpresasTable extends Migration
             $table->string('email');
             $table->string('localizacao');
             $table->integer('nuit');
-            $table->string('tipo');///ver se e ministerio ou insttituicao publica.
+           // $table->string('tipo');///ver se e ministerio ou insttituicao publica.
             $table->string('tipo_empresa');
             $table->string('url');
             $table->date('data_contrato');
             $table->string('descricao');
-            $table->dateTime('deleted_at');
+            $table->SoftDeletes();
             $table->timestamps();
 
         });

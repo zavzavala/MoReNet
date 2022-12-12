@@ -32,16 +32,16 @@ class RegisterUser extends Component
             'conf_password.same'=>'O campo confirmar password deve ser o mesmo que a password',
         ]);
 
-            $query =  User::create([
-                'email'=>$this->email,
-                'username'=>$this->username,
-                'password'=>Hash::make($this->password),
-                'created_at'=> \Carbon\Carbon::now(),
-            ]);
-            return redirect()->route('autor.Register.offline')->with('success','Com Sucesso!');
-            //session()->flash('success','Com sucesso!');
-            $this->email = $this->username = $this->password = $this->conf_password = null;
-    }
+        $query =  User::create([
+            'email'=>$this->email,
+            'username'=>$this->username,
+            'password'=>Hash::make($this->password),
+            'created_at'=> \Carbon\Carbon::now(),
+        ]);
+        return redirect()->route('autor.Register.offline')->with('success','Com Sucesso!');
+        //session()->flash('success','Com sucesso!');
+        $this->email = $this->username = $this->password = $this->conf_password = null;
+}
     public function render()
     {
         return view('livewire.register-user');

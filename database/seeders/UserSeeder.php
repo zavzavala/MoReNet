@@ -26,6 +26,7 @@ class UserSeeder extends Seeder
             'created_at' => \Carbon\Carbon::Now(),
             'password' => Hash::make('12345'),
             'remember_token' => Str::random(10),
+            'deleted_at' => Null,
 
         ]);
     }

@@ -6,6 +6,7 @@ use \App\Http\Controllers\AutorController;
 
 use \App\Http\Controllers\testcontroller;
 use \App\Http\Livewire\Empresa;
+use \App\Http\Livewire\empresas;
 
 Route::prefix('autor')->name('autor.')->group(function(){
 
@@ -28,13 +29,15 @@ Route::middleware(['auth:web'])->group(function(){
     Route::view('/docs', 'back.pages.docs')->name('docs');
     Route::view('/servicos', 'back.pages.services')->name('services');
     Route::view('/Empresas', 'back.pages.empresas')->name('TodasEmpresas');
+    /* Route::view('/Empresas', 'back.pages.empresas')->name('TodasEmpresas'); */
     Route::view('/Facturacao', 'back.pages.facturacao')->name('facturacao');
 
-    Route::Resource('/empresa', Empresa::class);
+    Route::resource('/empresa', Empresa::class);
     //Route::post('/empresa', [Empresa::class, 'store'])->name('empresa.store');
+    Route::resource('/empresas', empresas::class);
     
 });
 
 
 });
-Route::resource('/test', testcontroller::class);
+//Route::resource('/test', testcontroller::class);

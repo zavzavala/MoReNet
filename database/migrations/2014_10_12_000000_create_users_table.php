@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('username')->nullable();
             $table->string('picture')->nullable();
             $table->string('type')->default('2');
+            $table->dateTime('deleted_at')->nullable();
             $table->integer('blocked')->default('0');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();

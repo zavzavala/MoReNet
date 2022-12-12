@@ -3,8 +3,8 @@
 
  <!-- EMpresas -->
  
-    <form wire:submit.prevent = "store()" method="post">   
-        @CSRF
+    <form wire:submit.prevent = "store()" method="post" enctype = "form/multipart-data">   
+        @csrf
         <div class="mb-3">
            
          <!--    <label class="form-label">Instituicao de Ensino</label> -->
@@ -113,19 +113,21 @@
 
             <div id="doc">
 
-<label for="numeroRegistro">Carregar Anexos</label>
-<p>OBs: Boletim da República que cria entidade & Autorização do Ministério dos Negócois Estrangeiros</p>
+<label for="documento">Carregar Anexos</label>
+<p>OBs: Carrega Fichiros se existirem</p>
 
 <div class="form-rem form-row mb-3">
 
     <div class="col">
-        <input type="file" class="form-control @error('doc') is-invalid @enderror" name="doc[]"
-            value="{{ old('doc[0]') }}">
+        <input type="file" class="form-control" wire:model="doc"
+            value="{{ old('doc[0]') }}" multiple>
         {{-- <label class="custom-file-label" for="doc_anexo">Escolher Ficheiro</label> --}}
+        <span class="text-danger">@error('doc'){{$message}}@enderror</span>
     </div>
     <div class="col">
-        <input type="text" class="form-control  @error('dodesc_docc') is-invalid @enderror"
-            name="desc_doc[]" placeholder="nome do documento" value="{{ old('dodesc_docc[0]') }}">
+        <input type="text" class="form-control"
+        wire:model="desc_doc" placeholder="nome do documento" value="{{ old('dodesc_docc[0]') }}">
+        <span>@error('dodesc_docc'){{$message}}@enderror</span>
     </div>
 </div>
 
@@ -133,11 +135,11 @@
 
 <div class="form-group col-md-8">
 
-<button id="remove_linha" style="margin-top: 2%" class="btn btn-danger btn-tone m-r-5"> <i
+<button id="remove_linhas" wire:click.prevent="remove_linha" style="margin-top: 2%" class="btn btn-danger btn-tone m-r-5"> <i
         class="anticon anticon-file-add"></i> Remover Linha</a>
 
-    <button id="add_linha" style="margin-top: 2%" class="btn btn-secondary btn-tone m-r-5"> <i
-            class="anticon anticon-file-add"></i> Adicionar Linha</a>
+    <button id="add_linha" wire:click.prevent="add_linha" style="margin-top: 2%" class="btn btn-secondary btn-tone m-r-5"> <i
+            class="anticon anticon-file-add"></i> Adicionar Linhas</a>
 
 </div>
            <div class="form-footer">
@@ -168,73 +170,73 @@
     </form> 
 </div>
 <script>
-                let doc = document.getElementById('doc')
-                let remove_linha = document.getElementById('remove_linha')
-                let add_linha = document.getElementById('add_linha')
+   /*  let doc = document.getElementById('doc')
+    let remove_linha = document.getElementById('remove_linha')
+    let add_linha = document.getElementById('add_linha')
 
 
-                add_linha.onclick = function() {
-                    event.preventDefault()
+    add_linha.onclick = function() {
+        event.preventDefault()
 
 
-                    //+++++     CRIACAO DO INPUT ANEXO E LABEL DO ANEXO
-                    let input_doc = document.createElement('input')
-                    let label_doc = document.createElement('label')
+        //+++++     CRIACAO DO INPUT ANEXO E LABEL DO ANEXO
+        let input_doc = document.createElement('input')
+        let label_doc = document.createElement('label')
 
-                    //Settar os seus atributos
-                    input_doc.setAttribute('type', 'file')
-                    input_doc.setAttribute('name', 'doc[]')
-                    input_doc.setAttribute('class', 'form-control')
+        //Settar os seus atributos
+        input_doc.setAttribute('type', 'file')
+        input_doc.setAttribute('name', 'doc[]')
+        input_doc.setAttribute('class', 'form-control')
 
-                    label_doc.setAttribute('class', 'custom-file-label')
-                    label_doc.innerHTML = 'Escolher ficheiros'
+        label_doc.setAttribute('class', 'custom-file-label')
+        label_doc.innerHTML = 'Escolher ficheiros'
 
-                    //++++      CRIACAO DO INPUT DE DESCRICAO
-                    let input_desc = document.createElement('input')
+        //++++      CRIACAO DO INPUT DE DESCRICAO
+        let input_desc = document.createElement('input')
 
-                    //Settar atributos
-                    input_desc.setAttribute('type', 'text')
-                    input_desc.setAttribute('class', 'form-control')
-                    input_desc.setAttribute('name', 'desc_doc[]')
-                    input_desc.setAttribute('placeholder', 'Nome do documento')
-                    // input_desc.setAttribute('required')
+        //Settar atributos
+        input_desc.setAttribute('type', 'text')
+        input_desc.setAttribute('class', 'form-control')
+        input_desc.setAttribute('name', 'desc_doc[]')
+        input_desc.setAttribute('placeholder', 'Nome do documento')
+        // input_desc.setAttribute('required')
 
 
-                    //+++++ CRIACAO DE DUAS COLUNAS PARA INPUT E DESCIRCAO
-                    let div_col = document.createElement('div')
-                    let div_col2 = document.createElement('div')
+        //+++++ CRIACAO DE DUAS COLUNAS PARA INPUT E DESCIRCAO
+        let div_col = document.createElement('div')
+        let div_col2 = document.createElement('div')
 
-                    //Settar os atributos
-                    div_col.setAttribute('class', 'col')
-                    div_col2.setAttribute('class', 'col')
+        //Settar os atributos
+        div_col.setAttribute('class', 'col')
+        div_col2.setAttribute('class', 'col')
 
-                    //+++++++++CRIACAO DO FORM ROW
-                    let form_row = document.createElement('div')
+        //+++++++++CRIACAO DO FORM ROW
+        let form_row = document.createElement('div')
 
-                    //setar seus atributos
-                    form_row.setAttribute('class', 'form-row mb-3')
+        //setar seus atributos
+        form_row.setAttribute('class', 'form-row mb-3')
 
-                    //adicionar input file e sua label a primeira coluna
-                    div_col.appendChild(input_doc)
-                    // div_col.appendChild(label_doc)
+        //adicionar input file e sua label a primeira coluna
+        div_col.appendChild(input_doc)
+        // div_col.appendChild(label_doc)
 
-                    //Adiconar o input da descircao na sugunda coluna
-                    div_col2.appendChild(input_desc)
+        //Adiconar o input da descircao na sugunda coluna
+        div_col2.appendChild(input_desc)
 
-                    //Adicionar a primeira e sugunda coluna na div form-row
-                    form_row.appendChild(div_col)
-                    form_row.appendChild(div_col2)
+        //Adicionar a primeira e sugunda coluna na div form-row
+        form_row.appendChild(div_col)
+        form_row.appendChild(div_col2)
 
-                    //Adicionar a div form-row para o doc
-                    doc.appendChild(form_row)
+        //Adicionar a div form-row para o doc
+        doc.appendChild(form_row)
 
-                }
+    }
 
-                remove_linha.onclick = function() {
-                    event.preventDefault()
-                    let input_tags = doc.getElementsByClassName('form-row')
-                    if (input_tags.length > 1) {
-                        doc.removeChild(input_tags[(input_tags.length) - 1])
-                    }
-                }
-            </script>
+    remove_linha.onclick = function() {
+        event.preventDefault()
+        let input_tags = doc.getElementsByClassName('form-row')
+        if (input_tags.length > 1) {
+            doc.removeChild(input_tags[(input_tags.length) - 1])
+        }
+    } */
+ </script>

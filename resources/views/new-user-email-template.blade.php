@@ -7,6 +7,6 @@ use os dados abaixo para aceder e trocar a palavra-passe:
 <b>Email</b>: {{$email}} <br>
 <b>Password</b>: {{ $password }}
 <br><br>
-<a href="{{$url}}">Ver Formulario</a>
+<a href="{{$url}}">Abrir Formulario</a>
 <br><br>
 <b>Atencao</b>: Certifique-se de alterar a apalavra-passe.

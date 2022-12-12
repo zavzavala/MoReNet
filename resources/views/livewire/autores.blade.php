@@ -40,7 +40,7 @@
                 </div>
                 <div class="d-flex">
                     <a href="#" wire:click.prevent="editUser({{$autor}})" class="card-btn">Editar</a>
-                    <a href="#" class="card-btn">Eliminar</a>
+                    <a href="#" class="card-btn" wire:click.prevent = "deleteUser({{$autor}})">Eliminar</a>
                 </div>
             </div>
         </div>
@@ -120,7 +120,7 @@
           </div>
           <div class="modal-body">
            <form wire:submit.prevent = "updUser()" method="post">
-            <input type="text" wire:model="user_id">
+            <input type="hidden" wire:model="user_id">
             <div class="mb-3">
                 <label for="">Nome</label>
                 <input type="text" class="form-control" wire:model="nome" placeholder="Digite o Nome...">
