@@ -8,7 +8,7 @@
                 <h2 class="page-title">
                     Usuarios
                 </h2>
-                <div class="text-muted mt-1">1-18 of 413 people</div>
+                <div class="text-muted mt-1">qntd</div>
             </div>
             <!-- Page title actions -->
             <div class="col-auto ms-auto d-print-none">

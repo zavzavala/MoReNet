@@ -59,9 +59,9 @@ public $user_id;
                 'name'=>$this->nome,
                 'username'=>$this->username,
                 'email'=>$this->email,
-                'password'=>$this->default_pass,
+                'password'=>$default_pass,
                 'url'=>route('autor.profile'),
-            );
+            ); 
 
             $autor_email = $this->email;
             $autor_name = $this->nome;

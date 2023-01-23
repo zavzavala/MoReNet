@@ -101,11 +101,14 @@
                 </span>
               </a>
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="{{route('autor.Reg.company')}}">
+                <a class="dropdown-item" href="{{route('autor.empresa.create')}}">
                   Adicionar
                 </a>
-                <a class="dropdown-item" href="{{route('autor.TodasEmpresas')}}">
-                  Todas Empresas
+                <a class="dropdown-item" href="{{route('autor.empresa.show')}}">
+                  Todas Empresas 
+                </a>
+                <a class="dropdown-item" href="{{route('autor.empresa.TodasEmpresas')}}">
+                  CSV & EXCEL
                 </a>
                 <a class="dropdown-item" href="{{route('autor.services')}}">
                   Servicos
@@ -119,9 +122,12 @@
                 </span>
               </a>
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="{{route('autor.facturacao')}}">
+                <a class="dropdown-item" href="{{route('autor.facturar')}}">
                 Facturar
-                </a>   
+                </a>  
+                <a class="dropdown-item" href="{{route('autor.facturacao.show')}}">
+                Ver empresas facturadas
+                </a>  
               </div>
             </li>
             

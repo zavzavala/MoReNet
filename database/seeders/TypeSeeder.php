@@ -15,6 +15,7 @@ class TypeSeeder extends Seeder
     public function run()
     {
         \DB::table('types')->delete();
+        
         \DB::table('types')->insert([
             'id' => '1',
             'name' => 'Super-admin',

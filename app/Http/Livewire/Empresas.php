@@ -87,5 +87,18 @@ class Empresas extends Component
         ] 
         ); */
     }
+ 
+    
+    public function destroy($id){
+        dd($id);
+    }
+public function edit($id){
+    dd('Edit empresa', $id);
+    //$id = $empresa['id']; */
 
+    $this->dispatchBrowserEvent('ShowModalEdit_empresa');
+    
+    
+}
+    
 }

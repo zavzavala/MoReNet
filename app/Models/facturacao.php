@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 
 class facturacao extends Model
 {
@@ -18,6 +19,7 @@ class facturacao extends Model
 
     protected $fillable = [
         'empresa_id',
+        'user_id',
         'largura_banda',
         'aumento_banda',
         'preco_unitario',
@@ -35,5 +37,16 @@ class facturacao extends Model
 
     public function empresa_factura(){
         return $this->belongsTo(empresa::class,'empresa_id', 'id');
+
+        
     }
+     
+   /*  public function empresa_factura(){
+        return $this->hasMany(empresa::class)
+        ->select(\DB::raw('*'))
+        ->groupBy('id')
+        ->orderBy('id','desc');
+    } */
+    
+
 }

@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use League\CommonMark\Reference\Reference;
 
 class CreateFacturacaosTable extends Migration
 {
@@ -16,21 +17,22 @@ class CreateFacturacaosTable extends Migration
     {
         Schema::create('facturacaos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('empresa_id');
+            $table->foreignId('empresa_id')->references('empresas')->on('id')->cascadeOnDelete();
+            $table->foreignId('user_id')->references('users')->on('id');
             $table->string('largura_banda');
             $table->string('aumento_banda');
-            $table->string('preco_unitario');
+            $table->decimal('preco_unitario')->default(0);
             $table->string('ano');
             $table->string('mes');
             $table->string('n_factura');
-            $table->string('valor_facturado');
-            $table->string('debito');
-            $table->string('credito');
-            $table->string('valor_pago');
-            $table->string('divida_saldo');
+            $table->decimal('valor_facturado')->default(0);
+            $table->decimal('debito')->default(0);
+            $table->decimal('credito')->default(0);
+            $table->decimal('valor_pago')->default(0);
+            $table->decimal('divida_saldo')->default(0);
             $table->string('data_pagamento');
             $table->string('n_documento');
-            $table->dateTime('deleted_at');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

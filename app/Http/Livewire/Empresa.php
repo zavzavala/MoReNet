@@ -31,7 +31,7 @@ class Empresa extends Component
     //public $data_contrato;
     public $doc = [];
     public $desc_doc = [];
-
+    //////////////////FACTURACAO
     public function render()
     {
         /* return view('livewire.empresa',[
@@ -51,12 +51,13 @@ class Empresa extends Component
     }
 
     public function store(Request $request){
-      //dd($request->doc);
+      //dd($request->all());
         //dd($this->desc_doc, $this->doc);
-        $obj_empresa = new Company();
+   
+        
 
-     /*    $this->validate([
-            'cliente'=>'required',
+        /*  $this->validate([
+            'cliente'=>'required|unique:empresas,empresa',
             'telefone'=>'required|min:5|max:9|unique:empresas,telefone',
             'endereco'=>'required',
             'email'=>'required|email|unique:empresas,email',
@@ -68,18 +69,10 @@ class Empresa extends Component
             'nuit'=>'required|max:14'
         ],[
             
-        ]); */
+        ]);  */
     
-        /* if($this->Inst_ensino != '' && $this->tipo_empresa != ''){
-
-            $this->showToastr('Selecione apenas um. Minsiterio ou tipo Empresa', 'warning');
-
-        }else *//* if($this->Inst_ensino == '' && $this->tipo_empresa == ''){
-
-            $this->showToastr('Selecione pelomenos um. Minsiterio ou tipo Empresa', 'warning');
-
-        }else{ */
-        
+        $obj_empresa = new Company();
+        $obj_empresa->user_id=Auth::id();
         $obj_empresa->empresa=$this->cliente;
         $obj_empresa->telefone=$this->telefone;
         $obj_empresa->email=$this->email;
@@ -87,84 +80,87 @@ class Empresa extends Component
         $obj_empresa->data_contrato=$this->data_contrato;
         $obj_empresa->descricao=$this->descricao;
         $obj_empresa->tipo_empresa=$this->tipo_empresa;
-        //$obj_empresa->Empresa=$this->Empresa,
-       // $obj_empresa->tipo=$this->Inst_ensino;
         $obj_empresa->url=$this->url;
         $obj_empresa->nuit=$this->nuit;
-
-        $obj_empresa->save();
         //dd($obj_empresa);
+        $obj_empresa->save();
+       
         $empresa = $obj_empresa->id;
 
         if($empresa){
-           // $empresa_id = $empresa->id;
-           /*  for($i = 0; $i < count($this->doc); $i++){
 
-                $anexo = $this->doc[$i];
-                //$documento = substr($anexo, 6, strlen($anexo));
-               
-                $documento = $anexo->store('anexo');
-               $descricao = $this->desc_doc;
+            $this->showToastr('Registado com sucesso', 'success');
 
-                //dd($anexo, $desc_doc);
-    
-            }  */
-            if($this->doc){
-
-                foreach($this->doc as $ficheiro){
-                    //$anexo = $this->Documento($ficheiro, $empresa);
-                    $documento = $ficheiro->store('anexo');
-    
-                    //$documento = substr($anexo, 6, strlen($anexo) - 1);
-    
-                    // $documento = storage_path('app/') .$ficheiro;
-    
-                    $descricao = $this->desc_doc;
-    
-    
-                 //dd($documento, $descricao);
-    
-                }
-
-                $obj_anexo = new anexos();
-                    
-                $obj_anexo->empresa_id = $empresa;
-                $obj_anexo->user_id = Auth::id();
-                $obj_anexo->url=$documento;
-                $obj_anexo->descricao = $descricao;
-
-                $obj_anexo->save();
-                //dd($obj_anexo);
-
-                $this->showToastr('Documento carregado com sucesso', 'success');
-                //$this->reset();
-            }else{
-
-                $this->showToastr('Registado com sucesso', 'success');
-                //$this->reset();
-
-            }
+        }
 
            
 
-        }    
+          
             
     }
     
 
-    private function Documento($ficheiro, $empresa){
 
+    public function edit(Request $request){
+    
+       //dd('Edit empresa', $empresa);
+      // $id = $id['id'];
+        $id = $request->id;
+        //dd($id);
+       $this->dispatchBrowserEvent('ShowModalEdit_empresa');
+       $empresa = Company::find($id);
+       $empresa->user_id=Auth::id();
+       $this->cliente=$empresa['empresa'];
+       $this->telefone = $empresa['telefone'];
+       $this->email = $empresa['email'];
+       $this->endereco=$empresa['localizacao'];
+       $this->data_contrato = $empresa['data_contrato'];
+       $this->descricao=$empresa['descricao'];
+       $this->tipo_empresa = $empresa['tipo_empresa'];
+       $this->url=$empresa['url']; //endereco electronico
+       $this->nuit = $empresa['nuit'];
+      // $this->doc=$empresa['url'];
+      // $this->desc_doc = $empresa['desc_doc'];
 
     }
-    public function edit($empresa){
-        dd('edit');
-
-    }
-
+   
     public function show(){
+        $data = Company::all();
+
+        //dd($data);
+        return view('back.pages.consultas.clientes', compact('data'));
+   
+    }
+
+    public function destroy(Request $request){
+
+      
+        $id = $request->cliente_id;
+        if(!$id) abort(404);
+
+        $data = Company::find($id)->delete();
+        //dd($data);
+        if($data){
+            return response()->json(['code' => 1, 'msg' => 'Registro eliminado com sucesso!', 'success']);
+
+
+        }else{
+
+        return response()->json(['code' => 0, 'msg' => 'Falha ao tentar eliminar registro!', 'success']);
+
+        }
+    }
+    public function relatorio(Request $request){
+        
+        return view('back.pages.printers.clientes');
 
     }
 
+    public function relatorioIndividual(Request $request){
+        //dd($id);
+
+        return view('back.pages.printers.rel_cliente_individual');
+    }
     public function showToastr($message, $type){
 
         $this->dispatchBrowserEvent('showToastr',[
@@ -175,9 +171,6 @@ class Empresa extends Component
         ]);
     }
 
-    public function add_linha(){
-
-        $this->dispatchBrowserEvent('add_linha');
-    }
+   
 
 }

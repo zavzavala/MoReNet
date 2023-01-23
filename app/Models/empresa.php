@@ -4,12 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-//use Illuminate\Database\Elonquent\SoftDeletes;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class empresa extends Model
 {
-    //use HasFactory, SoftDeletes;
-    use HasFactory;
+    //use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $table = 'empresas';
     
@@ -18,6 +18,7 @@ class empresa extends Model
     //public $timestamps = 'true';
 
     protected $fillable = [
+        'user_id',
         'empresa',
         'telefone',
         'email',
