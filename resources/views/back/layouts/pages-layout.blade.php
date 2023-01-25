@@ -14,22 +14,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <title>@yield('pageTitle')</title>
-    @avite('resources/css/app/css')
+   
     <!-- CSS files -->
     <base href="/">
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
      -->
-    <link href="./back/dist/css/tabler.min.css" rel="stylesheet"/>
+
     <link rel="stylesheet" href="{{ asset('back/dist/libs/toastr/toastr.min.css')}}">
-    <link href="./back/dist/css/tabler-flags.min.css" rel="stylesheet"/>
-    <link href="./back/dist/css/tabler-payments.min.css" rel="stylesheet"/>
-    <link href="./back/dist/css/tabler-vendors.min.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="{{ asset('back/dist/libs/ijabo/ijaboCropTool.min.css') }}">
-  
+   
+    <link href="/back/dist/css/tabler.min.css" rel="stylesheet"/>
+    <link href="/back/dist/css/tabler-flags.min.css" rel="stylesheet"/>
+    <link href="/back/dist/css/tabler-payments.min.css" rel="stylesheet"/>
+    <link href="/back/dist/css/tabler-vendors.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="/back/dist/libs/ijabo/ijabo.min.css">
+    <script src="/back/dist/libs/ijaboViewer/jquery.ijaboViewer.min.js"></script>
+    <link rel="stylesheet" href="/back/dist/libs/ijaboCropTool/ijaboCropTool.min.css">
+    
     @stack('stylesheets')
     @livewireStyles
-    @powerGridStyles
-    <link href="./back/dist/css/demo.min.css" rel="stylesheet"/>
+    
+    <link href="back/dist/css/demo.min.css" rel="stylesheet"/>
+    <style>
+      .swal2-popup{
+        font-size: .85rem;
+      }
+    </style>
   </head>
   <body >
     <div class="wrapper">
@@ -64,7 +73,7 @@
   
     @stack('scripts')
     @livewireScripts
-    @powerGridScripts
+    
     <script>
     window.addEventListener('showToastr',function(event){
       toastr.remove();

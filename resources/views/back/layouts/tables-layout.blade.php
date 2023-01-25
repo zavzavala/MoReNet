@@ -35,11 +35,16 @@
     @stack('stylesheets')
     @livewireStyles
     @powerGridStyles
-    <link href="./back/dist/css/demo.min.css" rel="stylesheet"/>
+    <link href="/back/dist/css/demo.min.css" rel="stylesheet"/>
+    <style>
+      .swal2-popup{
+        font-size: .85rem;
+      }
+    </style>
   </head>
   <body >
     <div class="wrapper">
-      @include('back.layouts.inc.header')
+      @include('back.layouts.inc.header_tables')
       <div class="page-wrapper">
         <div class="container-xl">
           <!-- Page title -->
@@ -75,13 +80,14 @@
     <script src="assets/js/dataTables/jquery.dataTables.js"></script>
     <script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
     <script src="{{ asset('back/sweetalert2/sweetalert2.min.js') }}"></script>
+
     @stack('scripts')
     @livewireScripts
     @powerGridScripts
     <script>
        
      
-     
+
 
    </script>
   

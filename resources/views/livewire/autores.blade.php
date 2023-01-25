@@ -8,7 +8,7 @@
                 <h2 class="page-title">
                     Usuarios
                 </h2>
-                <div class="text-muted mt-1">qntd</div>
+                <div class="text-muted mt-1"></div>
             </div>
             <!-- Page title actions -->
             <div class="col-auto ms-auto d-print-none">
@@ -123,19 +123,19 @@
             <input type="hidden" wire:model="user_id">
             <div class="mb-3">
                 <label for="">Nome</label>
-                <input type="text" class="form-control" wire:model="nome" placeholder="Digite o Nome...">
+                <input type="text" disabled class="form-control" wire:model="nome" placeholder="Digite o Nome...">
                 <span class="text-danger">@error('nome'){{$message}}@enderror</span>
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Email</label>
-                <input type="email" class="form-control" wire:model="email" placeholder="Digite o email...">
+                <input type="email" disabled class="form-control" wire:model="email" placeholder="Digite o email...">
                 <span class="text-danger">@error('email'){{$message}}@enderror</span>
             </div>
 
             <div class="mb-3">
                 <label class="form-label">UserName</label>
-                <input type="text" class="form-control" wire:model = "username" placeholder="Digite o UserName...">
+                <input type="text" disabled class="form-control" wire:model = "username" placeholder="Digite o UserName...">
                 <span class="text-danger">@error('username'){{$message}}@enderror</span>
             </div>
 
