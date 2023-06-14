@@ -6,7 +6,7 @@
         <div class="row align-items-center">
             <div class="col">
                 <h2 class="page-title">
-                    Usuarios
+                    Usuários
                 </h2>
                 <div class="text-muted mt-1"></div>
             </div>
@@ -14,10 +14,10 @@
             <div class="col-auto ms-auto d-print-none">
                 <div class="d-flex">
                     <input type="search" class="form-control d-inline-block w-9 me-3" placeholder="Pesquisar por email ou UserName..." wire:model='search'>
-                    <a href="#" class="btn btn-primary" data-bs-target='#add_usuario' data-bs-toggle='modal'>
+                    <a href="#" class="btn btn-primary" data-bs-toggle="modal" wire:click.prevent="add_usuario" data-bs-target='#add_usuario'>
                     <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-                    Novo Usuario
+                    Novo Usuário
                     </a>
                 </div>
             </div>
@@ -40,12 +40,13 @@
                 </div>
                 <div class="d-flex">
                     <a href="#" wire:click.prevent="editUser({{$autor}})" class="card-btn">Editar</a>
-                    <a href="#" class="card-btn" wire:click.prevent = "deleteUser({{$autor}})">Eliminar</a>
+                   <!--  <a href="#" class="card-btn" id="deleteUser">Eliminar</a>  -->
+                  <a class="card-btn" data-id="{{$autor->id}}" id="deleteUser">Eliminar</a>  
                 </div>
             </div>
         </div>
         @empty
-        <span class="text-danger">Dados nao encontrados</span>
+        <span class="text-danger">Dados não encontrados</span>
         @endforelse
     </div>
     <!-- Paginacao -->
@@ -57,11 +58,11 @@
     
     <!-- MODALS -->
 
-    <div wire:ignore.self class="modal modal-blur fade" id = 'add_usuario' tabindex="-1" role="dialog" aria-hidden="true">
+    <div wire:ignore.self class="modal modal-blur fade" id = "add_usuario" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Adicionar Usuario</h5>
+            <h5 class="modal-title">Adicionar Usuário</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
@@ -109,21 +110,22 @@
       </div>
     </div>
 
-            <!-- Edit Modal -->
+    <!-- Edit Modal -->
             
-    <div wire:ignore.self class="modal modal-blur fade" id = 'edit_usuario' tabindex="-1" role="dialog" aria-hidden="true">
+    <div wire:ignore.self class="modal modal-blur fade" id = "edit_usuario" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Actualizar Usuario</h5>
+            <h5 class="modal-title">Actualizar Usuário</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
            <form wire:submit.prevent = "updUser()" method="post">
+            @csrf
             <input type="hidden" wire:model="user_id">
             <div class="mb-3">
                 <label for="">Nome</label>
-                <input type="text" disabled class="form-control" wire:model="nome" placeholder="Digite o Nome...">
+                <input type="text" class="form-control" wire:model="nome" placeholder="Digite o Nome...">
                 <span class="text-danger">@error('nome'){{$message}}@enderror</span>
             </div>
 

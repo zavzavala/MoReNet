@@ -20,6 +20,8 @@
     <base href="/">
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
      -->
+    <!-- <script src="{{ asset('back/css/bootstrap.css') }}"></script> -->
+
     <link href="./back/dist/css/tabler.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="{{ asset('back/dist/libs/toastr/toastr.min.css')}}">
     <link href="./back/dist/css/tabler-flags.min.css" rel="stylesheet"/>
@@ -74,12 +76,13 @@
     <!-- Tabler Core -->
     <script src="./back/dist/js/tabler.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" ></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" ></script> -->
     <script src="./back/dist/js/demo.min.js"></script>
    
     <script src="assets/js/dataTables/jquery.dataTables.js"></script>
     <script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
     <script src="{{ asset('back/sweetalert2/sweetalert2.min.js') }}"></script>
+    <!-- <script src="{{ asset('back/js/bootstrap.min.js') }}"></script> -->
 
     @stack('scripts')
     @livewireScripts

@@ -9,8 +9,7 @@
                     <div class="col-md-12">
                     
                         <h2>Consultar Empresas facturadas</h2>
-                        <h5>Aqui você poderá consultar Empresas facturadas. </h5>
-
+                   
                     </div>
                 </div>
                 <!-- /. ROW  -->
@@ -31,8 +30,8 @@
                                                 
                                                 <th>Codigo</th>
                                                 <th>Empresa</th>
-                                                <th>Largura Banda</th>
-                                                <th>Aumento Banda</th>
+                                                <th>Largura de Banda Contratada</th>
+                                                <th>Aumento Largura de Banda</th>
                                                 <th>Valor Facturado</th>
                                                 <th>Ação</th>
 
@@ -43,8 +42,8 @@
                                                 <tr class="odd gradeX">
                                                     <td>{{$items->id}}</td>
                                                    
-                                                    <td>{{$items->empresa_id}}</td>
-                                                    <td>{{$items->largura_banda}}</td>
+                                                    <td>{{$items->empresa}}</td>
+                                                    <td>{{$items->largura_banda_contratada}}</td>
                                                     <td>{{$items->aumento_banda}}</td>
                                                     <td>{{$items->valor_facturado}} MZN</td>
 

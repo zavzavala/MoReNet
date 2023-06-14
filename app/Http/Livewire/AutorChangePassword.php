@@ -30,7 +30,7 @@ class AutorChangePassword extends Component
     ]);
 
         if($query){
-                $this->showToastr('Palavra passe alterada com sucesso.','success');
+                $this->showToastr('Palavra-passe alterada com sucesso.','success');
                 $this->password = $this->new_password = $this->conf_password = null;
         }else{
                 $this->showToastr('Erro ao tentar alterar palavra-passe.','error');

@@ -27,10 +27,10 @@ class AutorLoginForm extends Component
                     'password'=>'required|min:5',
                 ],
                     [
-                        'login_id'=>'Email ou username e obrigatorio',
-                        'login_id.email'=>'Este email nao e valido',
-                        'login_id.exists'=>'Este email nao existe',
-                        'password.required'=>'Este campo e obrigatorio',
+                        'login_id'=>'Email ou username é obrigatório',
+                        'login_id.exists'=>'Este email não existe',
+                        'login_id.email'=>'Este email não é válido',
+                        'password.required'=>'Este campo é obrigatório',
                     
                 ]);
 
@@ -40,9 +40,9 @@ class AutorLoginForm extends Component
                     'password'=>'required|min:5',
 
                 ],[
-                    'login_id.required'=>'Email ou username sao obrigatorios',
-                    'login_id.exists'=>'Username nao registado',
-                    'password.required'=>'Password e obrigatorio',
+                    'login_id.exists'=>'Username não registado',
+                    'login_id.required'=>'Email ou username são obrigatórios',
+                    'password.required'=>'palavra-passe é obrigatório',
                 ]);
             }
                 $credencials = array($fieldType=>$this->login_id,'password'=>$this->password);
@@ -60,7 +60,7 @@ class AutorLoginForm extends Component
                         }
                     }
                 }else{
-                    session()->flash('fail','Email/UserName ou Password Incorrectos.');
+                    session()->flash('fail','Email/UserName ou palavra-passe Incorrectos.');
                 }
 
         //////Logar-se somente com email, codigo ABAIXO

@@ -20,6 +20,7 @@ class empresa extends Model
     protected $fillable = [
         'user_id',
         'empresa',
+        'largura_banda_contratada',
         'telefone',
         'email',
         'localizacao',
@@ -27,9 +28,9 @@ class empresa extends Model
         'nuit',
         'descricao',
         'tipo_empresa',
-        'tipo',
+      
         'url',
-        'informacao',
+        
     ];
 
     public function scopeSearch($query, $term){

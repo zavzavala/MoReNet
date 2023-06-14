@@ -9,7 +9,7 @@ class AutorPersonalDetails extends Component
 {
     public $autor;
 
-    public $name, $usuario, $email;
+    public $name, $usuario, $email,$username;
    
     public function mount(){
         $this->autor = User::find(auth('web')->id());
@@ -35,9 +35,9 @@ class AutorPersonalDetails extends Component
         $this->emit('updateRefreshAutorProfileHeader');
         $this->emit('updateTopHeader');
         
-        $this->showToastr('Informacao pessoal alterada com sucesso', 'success');
     }
     public function showToastr($message, $type){
+        $this->showToastr('Informação pessoal alterada com sucesso', 'success');
         return $this->dispatchBrowserEvent('showToastr',[
             'type'=>$type,
             'message'=>$message

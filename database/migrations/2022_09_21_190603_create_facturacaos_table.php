@@ -17,21 +17,23 @@ class CreateFacturacaosTable extends Migration
     {
         Schema::create('facturacaos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('empresa_id')->references('empresas')->on('id')->cascadeOnDelete();
-            $table->foreignId('user_id')->references('users')->on('id');
-            $table->string('largura_banda');
-            $table->string('aumento_banda');
-            $table->decimal('preco_unitario')->default(0);
-            $table->string('ano');
-            $table->string('mes');
-            $table->string('n_factura');
-            $table->decimal('valor_facturado')->default(0);
-            $table->decimal('debito')->default(0);
-            $table->decimal('credito')->default(0);
+            $table->foreignId('empresa_id')->constrained('empresas');
+            $table->foreignId('user_id')->constrained('users');
+            $table->integer('largura_banda_contratada')->default(0);
+            $table->integer('aumento_banda')->default(0);
+            $table->decimal('preco_unitario');
+            $table->decimal('banda_facturada')->default(0);
+            $table->decimal('valor_facturado');
+            $table->date('data_aumento_banda')->nullable();
+            $table->integer('diminuicao_banda')->default(0);
+            $table->date('data_diminuicao_banda')->nullable();
+            $table->string('comprovativo');
+            $table->date('data_facturacao');
             $table->decimal('valor_pago')->default(0);
-            $table->decimal('divida_saldo')->default(0);
-            $table->string('data_pagamento');
-            $table->string('n_documento');
+            $table->decimal('credito');
+            $table->decimal('debito');
+            $table->decimal('divida');
+
             $table->softDeletes();
             $table->timestamps();
         });

@@ -20,19 +20,20 @@ class facturacao extends Model
     protected $fillable = [
         'empresa_id',
         'user_id',
-        'largura_banda',
+        'largura_banda_contratada',
         'aumento_banda',
         'preco_unitario',
-        'ano',
-        'mes',
-        'n_factura',
+        'banda_facturada',
         'valor_facturado',
-        'debito',
-        'credito',
+        'data_aumento_banda',
+        'diminuicao_banda',
+        'data_diminuicao_banda',
+        'comprovativo',
+        'data_facturacao',
         'valor_pago',
-        'divida_saldo',
-        'data_pagamento',
-        'n_documento'
+        'credito',
+        'debito',
+        'divida'
     ];
 
     public function empresa_factura(){

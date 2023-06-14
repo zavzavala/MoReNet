@@ -23,11 +23,11 @@ class AutorResetForm extends Component
             'conf_password'=>'same:new_password',
         ],[
             'email.required'=>"Este campo e obrigatorio",
-            'email.email'=>'Este email nao e valido',
-            'email.exists'=>'Este email nao esta registado',
-            'new_password.required'=>'Insira nova password',
+            'email.email'=>'Este email não e válido',
+            'email.exists'=>'Este email não está registado',
+            'new_password.required'=>'Insira nova palavra-passe',
             'new_password.min'=>'Insira no minimo 5 digitos',
-            'conf_password'=>'Esta password nao e igual a nova Password',
+            'conf_password'=>'Esta palavra-passe não e igual a nova palavra-passe',
         ]);
 
         $check_token = DB::table('password_resets')->where([
@@ -46,7 +46,7 @@ class AutorResetForm extends Component
                 ])->delete();
 
                 $success_token = Str::random(64);
-                session()->flash('success', 'Sua password foi actualizada com sucesso. Faca Login com seu email (<span>'.$this->email.'</span>) e nova password');
+                session()->flash('success', 'Sua palavra-passe foi actualizada com sucesso. Faca Login com seu email (<span>'.$this->email.'</span>) e nova password');
                     
                 $this->redirectRoute('autor.login', ['tkn'=>$success_token, 'UEmail'=>$this->email]);
                 

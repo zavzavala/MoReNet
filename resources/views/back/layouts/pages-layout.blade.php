@@ -19,8 +19,11 @@
     <base href="/">
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
      -->
+     <!-- <link href="{{ asset('back/css/bootstrap.css') }}" /> -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet" />
 
-    <link rel="stylesheet" href="{{ asset('back/dist/libs/toastr/toastr.min.css')}}">
+    <link rel="stylesheet" href="{{asset('back/dist/libs/toastr/toastr.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('back/sweetalert2/sweetalert2.min.css') }}">
    
     <link href="/back/dist/css/tabler.min.css" rel="stylesheet"/>
     <link href="/back/dist/css/tabler-flags.min.css" rel="stylesheet"/>
@@ -61,13 +64,20 @@
     </div>
    
     <!-- Libs JS -->
-    <script src="{{ asset('back/dist/libs/jquery/jquery-3.6.0.min.js')}}"></script>
+    <script src="{{asset('back/dist/libs/jquery/jquery-3.6.0.min.js')}}"></script>
 
   <!--  <script src="assets/js/jquery-1.10.2.js"></script> -->
-
+<!-- CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.0/css/toastr.css" rel="stylesheet" />
+  <script src="assets/js/morris/raphael-2.1.0.min.js"></script>
+  <script src="assets/js/morris/morris.js"></script>
+<!-- JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.0/js/toastr.js"></script>
     <script src="{{ asset('back/dist/libs/ijabo/ijaboCropTool.min.js')}}"></script>
     <script src="{{ asset('back/dist/libs/toastr/toastr.min.js')}}"></script>
     <script src="./back/dist/libs/apexcharts/dist/apexcharts.min.js"></script>
+    <script src="{{ asset('back/sweetalert2/sweetalert2.min.js') }}"></script>
+    <script src="{{ asset('back/js/bootstrap.min.js') }}"></script>
     <!-- Tabler Core -->
     <script src="./back/dist/js/tabler.min.js"></script>
   
@@ -91,8 +101,64 @@
     });
      
    
+    
    </script>
+    @if(Session::has('success'))
+      <script>
+        toastr.success("{!!Session::get('success')!!}");
+        swal("Sucesso!","{!! Session::get('success') !!}","success",{
+          button:"OK",
+        })
+      </script>
+    @endif
+    <script>
+      toastr.options = {
+      "closeButton": false,
+      "debug": false,
+      "newestOnTop": false,
+      "progressBar": true,
+      "positionClass": "toast-top-right",
+      "preventDuplicates": true,
+      "onclick": null,
+      "showDuration": "300",
+      "hideDuration": "1000",
+      "timeOut": "5000",
+      "extendedTimeOut": "1000",
+      "showEasing": "swing",
+      "hideEasing": "linear",
+      "showMethod": "fadeIn",
+      "hideMethod": "fadeOut"
+
+    }
+  </script>
     <script src="./back/dist/js/demo.min.js"></script>
+    <script>
    
+   window.addEventListener('add_usuario', function(event){
+    $('#add_usuario').modal('show');
+});
+
+$(window).on('hide.bs.modal', function(){
+    Livewire.emit('resetForm');
+
+});
+
+window.addEventListener('hide_modal_autor', function(event){
+    $('#add_usuario').modal('hide');
+});
+
+window.addEventListener('hide_edit_modal', function(event){
+    $('#edit_usuario').modal('hide');
+});
+
+window.addEventListener('ShowModalEdit_usuario', function(event){
+    $('#edit_usuario').modal('show');
+});
+    
+window.addEventListener('ShowModalEmpresa', function(event){
+    $('#company').modal('show');
+});
+  
+</script>
   </body>
 </html>

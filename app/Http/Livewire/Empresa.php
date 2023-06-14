@@ -15,7 +15,7 @@ class Empresa extends Component
 
     use WithFileUploads;
 
-    public $cliente;
+    public $cliente,$largura_banda_contratada;
     public $telefone;
     public $endereco;
     public $email;
@@ -51,13 +51,14 @@ class Empresa extends Component
     }
 
     public function store(Request $request){
-      //dd($request->all());
+      dd($request->all());
         //dd($this->desc_doc, $this->doc);
    
         
 
         /*  $this->validate([
             'cliente'=>'required|unique:empresas,empresa',
+            'largura_banda_contratada'=>'required',
             'telefone'=>'required|min:5|max:9|unique:empresas,telefone',
             'endereco'=>'required',
             'email'=>'required|email|unique:empresas,email',
@@ -74,6 +75,7 @@ class Empresa extends Component
         $obj_empresa = new Company();
         $obj_empresa->user_id=Auth::id();
         $obj_empresa->empresa=$this->cliente;
+        $obj_empresa->largura_banda_contratada = $this->largura_banda_contratada;
         $obj_empresa->telefone=$this->telefone;
         $obj_empresa->email=$this->email;
         $obj_empresa->localizacao=$this->endereco;
@@ -111,6 +113,7 @@ class Empresa extends Component
        $empresa = Company::find($id);
        $empresa->user_id=Auth::id();
        $this->cliente=$empresa['empresa'];
+       $this->largura_banda_contratada=$empresa['largura_banda_contratada'];
        $this->telefone = $empresa['telefone'];
        $this->email = $empresa['email'];
        $this->endereco=$empresa['localizacao'];

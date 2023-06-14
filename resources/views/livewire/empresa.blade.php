@@ -102,9 +102,16 @@
                     <span class="text-danger">@error('nuit'){{$message}}@enderror()</span>
                     </div>
                 </div>
-                <div class="col-lg-12">
+                <div class="col-lg-6">
                     <div>
                     <label class="form-label">Informacao Adicional</label>
+                    <textarea class="form-control" wire:model="descricao" rows="3"></textarea>
+                    <span class="text-danger">@error('descricao'){{$message}}@enderror</span>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div>
+                    <label class="form-label">Laragura Facturada</label>
                     <textarea class="form-control" wire:model="descricao" rows="3"></textarea>
                     <span class="text-danger">@error('descricao'){{$message}}@enderror</span>
                     </div>
@@ -138,7 +145,7 @@
                     <div class="col-lg-4">
                         <div class="m-3">
                             <a href="{{route('autor.home')}}" class="btn btn-link link-secondary">
-                            Cancelar
+                            Cancelars
                             </a>
                         </div>
                     </div>

@@ -52,34 +52,32 @@
                 </span>
               </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="./index.html">
-                <span class="nav-link-title">
-                  Definições
-                </span>
-              </a>
-            </li>
             @if(auth()->user()->type == 1)
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#navbar-extra" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false">
-                <span class="nav-link-title">
-                Utilizadores
-                </span>
-              </a>
-              <div class="dropdown-menu">
-              <a class="nav-link" href="{{ route('autor.usuarios') }}">
-                <span class="nav-link-title">
-                Utilizadores
-                </span>
-              </a>
-              <a class="nav-link" href="{{ route('autor.Register.offline') }}">
-                <span class="nav-link-title" title="Cadastrar utilizador caso não esteja conectado à internet.">
-                  Adiconar utilizador Offline
-                </span>
-              </a>
+              <li class="nav-item">
+              <a class="nav-link" style="float:right;" href="{{route('autor.commands/db:backup')}}">BackUp Banco</a>
+            
+              </li>
+            
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#navbar-extra" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false">
+                  <span class="nav-link-title">
+                  Utilizadores
+                  </span>
+                </a>
+                <div class="dropdown-menu">
+                <a class="nav-link" href="{{ route('autor.usuarios') }}">
+                  <span class="nav-link-title">
+                  Utilizadores
+                  </span>
+                </a>
+                <a class="nav-link" href="{{ route('autor.Register.offline') }}">
+                  <span class="nav-link-title" title="Cadastrar utilizador caso não esteja conectado à internet.">
+                    Adiconar utilizador Offline
+                  </span>
+                </a>
                 
-              </div>
-            </li>
+                </div>
+              </li>
             
             @endif
             
@@ -119,7 +117,25 @@
                 </a>  
               </div>
             </li>
-            
+            <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#navbar-extra" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false">
+                <span class="nav-link-title">
+                  Relatórios
+                </span>
+              </a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="{{route('autor.pesquisas')}}">
+                Facturação
+                </a>  
+                <a class="dropdown-item" href="{{route('autor.empresas')}}">
+                Empresas
+                </a> 
+                <a class="dropdown-item" href="{{route('autor.geral')}}">
+                Geral
+                </a> 
+              </div>
+              
+            </li>
           </ul>
         </div>
       </div>

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Livewire;
+use Illuminate\Http\Request;
 
 use Livewire\Component;
 use App\Models\User;
@@ -86,11 +87,24 @@ public $user_id;
 
         }
     }
-    public function deleteUser($autor){
-        dd('delete', $autor);
+    public function deleteUser(Request $request){
+    
+        $id = $request->id;
+        $detele = User::find($id)->delete();
+
+        return response()->json(['code'=>1, 'msg'=>'Utilizador Eliminado com sucesso']);
+        //$this->showToastr('Utilizador Eliminado com sucesso', 'success');
+
+       
+
+    }
+    public function add_usuario(){
+       
+        $this->dispatchBrowserEvent('add_usuario');
+
     }
     public function editUser($autor){
-        //dd(['sgg', $autor]);
+       //dd('ghjkl');
         $this->dispatchBrowserEvent('ShowModalEdit_usuario');
         $this->user_id = $autor['id'];
         $this->nome= $autor['name'];
@@ -146,6 +160,7 @@ public $user_id;
        /*  return view('livewire.autores',[
             'autores' =>User::where('id', '!=',auth()->id())->paginate(4),
         ]); */
+
     }
     
 }

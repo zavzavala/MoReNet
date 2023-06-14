@@ -26,7 +26,6 @@
          
         </div>
         <div class="tab-pane" id="tabs-password">
-        
           <div>
             @livewire('autor-change-password')
           </div>

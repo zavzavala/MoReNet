@@ -12,104 +12,82 @@ use Illuminate\Support\Facades\DB;
 class FacturacaoController extends Component
 {
 
-    public $cliente, $banda, $aumento_banda, $preco_unitario, $ano, $mes, $n_factura, $valor_facturado,
-    $debito, $valor_pago, $divida, $credito, $data_pagamento, $numero_doc;
+    public $cliente, $largura_banda_contratada, $preco_unitario, $banda_facturada, $valor_facturado, $aumento_banda, $data_aumento_banda, $data_diminuicao_banda,
+    $comprovativo, $data_facturacao, $valor_pago, $credito, $debito, $divida, $diminuicao_banda;
     public function render()
     {
         return view('livewire.facturacao-controller');
     }
-
-
 
         public function index(){
 
         return view('back.pages.empresa');
 
         }
-    public function store(){
-        //dd('FActura');
-        /* 
-            preco_unitario
-            valor_facturado
-            valor_pago
-            debito
-            credito
-            divida
-        */
-        
-        //$v_facturado = $this->valor_pago - $this->credito;
-
-        //$divida = $this->valor_facturado + $this->debito - $this->credito - $this->valor_pago;
-
-        //$divida = ++$divid;
-        //dd($divid);
-
-        //dd('Facturado',$this->valor_facturado, 'divida:',$divida);
-      
+    public function store(Request $request){
+       
         $objCdastra = new facturacao();
-       /*  $this->validate([
+        $this->validate([
             'cliente' => 'required',
-            'banda' => 'required',
-            'aumento_banda' => 'required',
+            'largura_banda_contratada' => 'required',
             'preco_unitario' => 'required',
-            'ano' => 'required',
-            'mes' => 'required',
-            'n_factura' => 'required',
+            'banda_facturada' => 'required',
             'valor_facturado' => 'required',
+            'aumento_banda' => 'required',
+            'diminuicao_banda' => 'required',
+            'comprovativo' => 'required',
+            'data_facturacao' => 'required',
             'valor_pago' => 'required',
-            'debito' => 'required',
-            //'divida' => 'required',
             'credito' => 'required',
-            'data_pagamento' => 'required',
-            'numero_doc' => 'required',
+            'debito' => 'required',         
 
         ],
         [
             'cliente.required' => 'Selecione uma instituicao',
-            'banda.required' => 'Este campo é obrigatòrio',
+            'largura_banda_contratada.required' => 'Este campo é obrigatòrio',
 
             'aumento_banda.required' => 'Este campo é obrigatòrio',
 
             'preco_unitario.required' => 'Este campo é obrigatòrio',
 
-            'ano.required' => 'Este campo é obrigatòrio',
-            'mes.required' => 'Este campo é obrigatòrio',
-            'n_factura.required' => 'Este campo é obrigatòrio',
+            'banda_facturada.required' => 'Este campo é obrigatòrio',
+            'valor_pago.required' => 'Este campo é obrigatòrio',
             'valor_facturado.required' => 'Este campo é obrigatòrio',
 
-            'valor_pago.required' => 'Este campo é obrigatòrio',
+            'diminuicao_banda.required' => 'Este campo é obrigatòrio',
 
             'debito.required' => 'Este campo é obrigatòrio',
 
             'divida.required' => 'Este campo é obrigatòrio',
 
             'credito.required' => 'Este campo é obrigatòrio',
-            'data_pagamento.required' => 'Este campo é obrigatòrio',
+            'data_facturacao.required' => 'Este campo é obrigatòrio',
 
-            'numero_doc.required' => 'Este campo é obrigatòrio',
+            'comprovativo.required' => 'Este campo é obrigatòrio',
             
+        ]); 
 
-        ]); */
-
-
+        
         $objCdastra->empresa_id=$this->cliente;
         $objCdastra->user_id=Auth::id();
-        $objCdastra->largura_banda=$this->banda;
+        $objCdastra->largura_banda_contratada=$this->largura_banda_contratada;
         $objCdastra->aumento_banda=$this->aumento_banda;
         $objCdastra->preco_unitario=$this->preco_unitario;
-        $objCdastra->ano=$this->ano;
-        $objCdastra->mes=$this->mes;
-        $objCdastra->n_factura=$this->n_factura;
+        $objCdastra->banda_facturada=$this->banda_facturada;
         $objCdastra->valor_facturado=$this->valor_facturado;
-        $objCdastra->debito=$this->debito;
+        //$objCdastra->aumento_banda=$this->aumento_banda;
+        $objCdastra->data_aumento_banda=$this->data_aumento_banda;
+        $objCdastra->data_diminuicao_banda=$this->data_diminuicao_banda;
+        $objCdastra->diminuicao_banda=$this->diminuicao_banda;
+        $objCdastra->comprovativo=$this->comprovativo;
+        $objCdastra->data_facturacao=$this->data_facturacao;
         $objCdastra->valor_pago=$this->valor_pago;
-        $objCdastra->divida_saldo=$this->divida;
         $objCdastra->credito=$this->credito;
-        $objCdastra->data_pagamento=$this->data_pagamento;
-        $objCdastra->n_documento=$this->numero_doc;
+        $objCdastra->debito=$this->debito;
+        $objCdastra->divida=$this->divida;
 
         $objCdastra->save();
-        dd($objCdastra);
+        //dd($objCdastra);
         if($objCdastra){
 
             $this->showToastr( 'Registro salvo com sucesso!', 'success');
@@ -238,7 +216,7 @@ class FacturacaoController extends Component
 
             return response()->json(['code' => 1, 'msg' => 'Registro alterado com sucesso!', 'success']);
 
-            return redirect()->route('facturacao.show');
+            //return redirect()->route('facturacao.show');
             //return view('back.pages.consultas.facturacao');
            
 
