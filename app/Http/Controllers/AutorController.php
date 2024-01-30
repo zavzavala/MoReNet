@@ -31,9 +31,7 @@ class AutorController extends Controller
 
                                         
         $mes_debito = DB::select(DB::raw('select monthname(data_facturacao) as mes_debito,
-                                        sum(debito) as total_debito
-                                        
-                                        from facturacaos group by mes_debito'));
+            sum(debito) as total_debito from facturacaos group by mes_debito'));
 
         $mes_credito = DB::table('facturacaos')
         ->selectRaw('MONTHNAME(data_facturacao) as mes_credito,sum(credito) as total_credito')
@@ -44,16 +42,16 @@ class AutorController extends Controller
             //$data_mes_credito = $mes_credito;
 
            
-            foreach($mes_credito as $dat_credito){
-            //dd($dat);
+            foreach($mes_credito as $dat_creditos){
+                $dat_credito = $dat_creditos;
             }
 
             
-            foreach($mes_debito as $dat_debito){
-
-            }
+            foreach($mes_debito as $dat_debitos){
+                $dat_debito = $dat_debitos;
+            }   
         
-        //dd($dat_debito);
+        //dd($dat_credito);
 
         return view('back.pages.home', compact('facturado', 'debito', 'meses_factura', 'dat_credito','dat_debito'));
         
