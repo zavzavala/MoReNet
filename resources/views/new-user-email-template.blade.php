@@ -1,6 +1,6 @@
 <br>
 ola, <b>{{$name}}</b> <br><br>
-Sua conta foi criada co sucesso.
+Sua conta foi criada com sucesso.
 use os dados abaixo para aceder e trocar a palavra-passe:
 <br>
 <b>Username</b>: {{$username }} <br>

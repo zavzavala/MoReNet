@@ -30,7 +30,7 @@
           </a>
           <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
             
-            <a href="{{ route('autor.profile') }}" class="dropdown-item">Dados &amp; pessoais</a>
+            <a href="{{ route('autor.profile') }}" class="dropdown-item">Dados <!-- &amp; --> pessoais</a>
            
             <div class="dropdown-divider"></div>
             @if(auth()->user()->type == 1)
@@ -80,7 +80,11 @@
               </li>
             
             @endif
-            
+            <li class="nav-item">
+
+              <a href="{{route('autor.create.servicos')}}" class="nav-link">Serviços</a>
+
+            </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#navbar-extra" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false">
                 <span class="nav-link-title">

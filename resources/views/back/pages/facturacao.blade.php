@@ -12,34 +12,50 @@
                 <div class="col-md-12 col-sm-12">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                        Campos de cadastro
+                            Campos de cadastro<!-- (<div id="l_banda"></div>) -->
                         </div>
+                        @if(session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                        @endif
+
+                        @if(session('error'))
+                            <div class="alert alert-danger">
+                                {{ session('error') }}
+                            </div>
+                        @endif
+                        <br>
+                        <br>
+                        <br>
                         <div class="panel-body">
                             <div class="form-selectgroup-boxes row mb-3">
                                 <!--  -->
                                 <div class="col-lg-6">
                                     <label class="form-label">Cliente/Empresa</label>
-                                    <select class="form-control"name="cliente" placeholder="Nome da Empresa/Cliente">
-                                        <option value="">-Selecione-</option>
-                                        @foreach(\App\Models\empresa::all() as $empresa)
-                                            <option value = "{{old('cliente',$empresa->id)}}">{{$empresa->empresa}}</option>
+                                    <select class="form-control" name="cliente" id="cliente" placeholder="Nome da Empresa/Cliente">
+                                        <option value="">Selecione a empresa</option>
+                                        @foreach($data as $empresa)
+                                            <option value="{{ $empresa->id }}" {{ old('cliente') == $empresa->id ? 'selected' : '' }}>
+                                                {{ $empresa->empresa}} (Banda {{$empresa->largura_banda_contratada}} GB)
+                                            </option>
+                                            
                                         @endforeach
                                     </select>
-                                        @if($errors->has('cliente'))
-                                            <span role="alert" class="text-danger">{{$errors->first('cliente')}}</span>
-                                        
-                                        @endif
+
+                                    @if($errors->has('cliente'))
+                                        <span role="alert" class="text-danger">{{$errors->first('cliente')}}</span>
+                                    
+                                    @endif
                                     
                                 </div>
 
                                 <div class="col-lg-6">
+                                    <label class="form-label">Banda Contrada</label>
+                                    <input type="text" id="largura_banda_contratada" class="form-control" name="largura_banda_contratada" value="{{old('largura_banda_contratada')}}" class="form-control">
 
-                                    <label class="form-label">Largura de Banda Contratada</label>
-                                    <input type="text" name="largura_banda_contratada" value="{{old('largura_banda_contratada')}}" id="largura_banda_contratada" class="form-control">
-                                    @if($errors->has('largura_banda_contratada'))
-                                    <span role="alert" class="text-danger">{{$errors->first('largura_banda_contratada')}}</span>
+                                    <br>
                                     
-                                    @endif
                                 </div>
                                 <div class="col-lg-6">
 
@@ -193,7 +209,8 @@
                                             <button type="submit" class="btn btn-primary ms-auto">
                                             <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
                                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-                                            Cadastrar empresa
+                                            
+                                            Factura empresa
                                             </button>
                                         </div>
                                     </div>
@@ -244,7 +261,7 @@
             var valor_pago = (jQuery('#valor_pago').val() == '' ? 0 : jQuery('#valor_pago').val());
             //var valor_facturado = (jQuery('#valor_facturado').val() == '' ? 0 : jQuery('#valor_facturado').val());
          
-            var divida = (parseInt(valor_facturado) + parseInt(debito) - parseInt(credito) - parseInt(valor_pago) );
+            var divida = ((parseInt(valor_facturado) + parseInt(debito)) - parseInt(credito) - parseInt(valor_pago) );
          
             //var total2 = (parseInt(divida) - parseInt(total));
 
@@ -283,7 +300,41 @@
 
     });
 
-     
+     //////A/* SOLICITACAO AJAX PARA PREENCHIMENTO AUTOMATIO DE LARGURA DE BANDA SOLICITADA */
+     $(document).ready(function() {
+        $('#cliente').change(function() {
+            var banda = $(this).val();
+
+            $.ajax({
+                url: 'autor/Buscar_Largura_Banda',
+                type: 'GET',
+                data: { valor_selecionado: banda },
+                success: function(data) {
+                    $('#l_banda').html(''); // Limpa o conteúdo atual
+
+                    $.each(data, function(key, value) {
+                        // Adiciona uma div responsiva
+                        var inputDiv = $('<div class="col-lg-6"></div>');
+
+                        // Adiciona o input dentro da div
+                        var inputField = $('<input type="text" id="largura_banda_contratadaxx" class="form-control" name="largura_banda_contratada" value="' + value.largura_banda_contratada + '">');
+
+                        // Adiciona a div ao elemento com o ID 'l_banda'
+                        $('#l_banda').append(inputDiv.append(inputField));
+
+                    });
+
+                }
+
+            });
+
+        });
+
+    });
+
+    setTimeout(function() {
+        $('.alert-success').fadeOut('slow');
+    }, 5000); // 5000 milissegundos (5 segundos)
 
 </script>
 

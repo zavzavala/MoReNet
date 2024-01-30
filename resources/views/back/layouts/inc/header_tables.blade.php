@@ -6,7 +6,7 @@
       </button>
       <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
         <a href=".">
-          <img src="./back/static/logo.png" width="110" height="32" alt="Tabler" class="navbar-brand-image">
+          <img src="./back/static/logo.png" width="" height="100px" alt="Tabler" class="navbar-brand-image">
         </a>
       </h1>
       <div class="navbar-nav flex-row order-md-last">

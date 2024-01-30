@@ -30,9 +30,12 @@
                                                 
                                                 <th>Codigo</th>
                                                 <th>Empresa</th>
-                                                <th>Largura de Banda Contratada</th>
-                                                <th>Aumento Largura de Banda</th>
+                                                <th>L.Banda Contratada</th>
+                                                <th>Aumento L.Banda</th>
                                                 <th>Valor Facturado</th>
+                                                <th>Valor Pago</th>
+                                                <th>Dívida</th>
+                                                <th>Data da Factura</th>
                                                 <th>Ação</th>
 
                                             </tr>
@@ -43,10 +46,12 @@
                                                     <td>{{$items->id}}</td>
                                                    
                                                     <td>{{$items->empresa}}</td>
-                                                    <td>{{$items->largura_banda_contratada}}</td>
-                                                    <td>{{$items->aumento_banda}}</td>
+                                                    <td>{{$items->largura_banda_contratada}} GB</td>
+                                                    <td>{{$items->aumento_banda}} GB</td>
                                                     <td>{{$items->valor_facturado}} MZN</td>
-
+                                                    <td>{{$items->valor_pago}} MZN</td>
+                                                    <td>{{$items->divida}} MZN</td>
+                                                    <td>{{$items->data_facturacao}} </td>
                                                     <td style="padding: 1px 1px 1px 1px;">
                                                         <a href="<?= route('autor.facturacao.edit', ['id'=>$items->id])?>"><i title="Alterar Registro" style=" color:#c09046; font-size:14px;margin-left:2px; margin-right:2px" class="fa fa-pencil"></i></a>
                                                         <a href="#" id="deletefactura" data-id="{{$items->id}}"><i title="Excluir registro" style=" color:red; font-size:14px; margin-left:1px" class="fa fa-trash"></i></a>

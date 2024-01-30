@@ -9,6 +9,7 @@ use App\Http\Controllers\EmpresaController;
 use \App\Http\Livewire\Empresa;
 use \App\Http\Livewire\empresas;
 use App\Http\Controllers\FacturacaoController;
+use App\Http\Controllers\ServicosController;
 
 Route::prefix('autor')->name('autor.')->group(function(){
 
@@ -34,9 +35,22 @@ Route::middleware(['auth:web'])->group(function(){
     Route::view('/docs', 'back.pages.docs')->name('docs');
     Route::view('/servicos', 'back.pages.services')->name('services');
     Route::view('/Lista-Empresas', 'back.pages.empresas')->name('empresa.TodasEmpresas');///Este puxa o DataGrid
-    /* Route::view('/Empresas', 'back.pages.empresas')->name('TodasEmpresas'); */
-    Route::view('/facturar', 'back.pages.facturacao')->name('facturar');
     
+    Route::get('/adicionar-servicos', [ServicosController::class, 'create'])->name('create.servicos');
+    Route::post('/salvar-servicos', [ServicosController::class, 'store'])->name('save.servicos');
+    Route::get('/editar-servicos/{servicos}', [ServicosController::class, 'edit'])->name('edit.servicos');
+    Route::post('actualizar-servicos/{servicos}', [ServicosController::class, 'update'])->name('update.servicos');
+    Route::post('/eliminar-servicos/{servicos}', [ServicosController::class, 'destroy'])->name('destroy.servicos');
+    /*Route::view('/Empresas', 'back.pages.empresas')->name('TodasEmpresas'); */
+
+    /* Estas duas linhas sao validas */
+    
+    //Route::view('/facturar', 'back.pages.facturacao')->name('facturar');
+      Route::get('/facturar', [FacturacaoController::class, 'create'])->name('facturar');///Ver empresas facturadas
+    
+      Route::get('/Buscar_Largura_Banda', [FacturacaoController::class, 'Buscar_Largura_Banda'])->name('Buscar_Largura_Banda');
+    /* Linhas acima */
+
     //Route::resource('/empresa', Empresa::class);///CADASTRO DE EMPRESAS
     Route::get('/empresa', [EmpresaController::class, 'create'])->name('empresa.create');
 
@@ -72,7 +86,9 @@ Route::middleware(['auth:web'])->group(function(){
     Route::get('/Dados-facturacao', [FacturacaoController::class, 'pesquisas'])->name('pesquisas');
     Route::post('/buscar-dados-facturacao', [FacturacaoController::class, 'buscarDados'])->name('buscarDados');
     Route::get('/ver-empresas', [FacturacaoController::class, 'empresas'])->name('empresas');
-    Route::get('/geral', [FacturacaoController::class, 'geral'])->name('geral');
+    Route::get('/dividas', [FacturacaoController::class, 'geral'])->name('geral');
+    Route::get('/dividasByEmpresas', [FacturacaoController::class, 'ByEmpresa'])->name('geralByEmpresa');
+
     Route::post('/buscar-dados-empresas', [FacturacaoController::class, 'buscarDadosFacturacao'])->name('buscarDadosFacturacao');
    
     Route::get('/relatorio-facturacao', [FacturacaoController::class, 'relatorioTodos'])->name('facturacao.relatorio');///Ver empresas facturadas
@@ -87,6 +103,7 @@ Route::middleware(['auth:web'])->group(function(){
 
         Artisan::call('db:backup');
         return "Backup do Banco Feito Com Sucesso.";
+
     })->name('commands/db:backup');
 
 });

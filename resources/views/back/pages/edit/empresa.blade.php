@@ -40,8 +40,8 @@
                                     <label class="form-label">Data Contrato</label>
                                     <input type="date" name="data_contrato" value="{{old('data_contrato', $data->data_contrato)}}" class="form-control">
                                     @if($errors->has('data_contrato'))
-                                    <span role="alert" class="text-danger">{{$errors->first('data_contrato')}}</span>
-                                @endif
+                                        <span role="alert" class="text-danger">{{$errors->first('data_contrato')}}</span>
+                                    @endif
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="mb-3">
@@ -83,7 +83,7 @@
                                     
                                     <input type="text" name="email"  value="{{old('email',$data->email)}}" class="form-control">
                                     @if($errors->has('email'))
-                                    <span role="alert" class="text-danger">{{$errors->first('email')}}</span>
+                                        <span role="alert" class="text-danger">{{$errors->first('email')}}</span>
                                     @endif
                                     </div>
                                 </div>
@@ -105,7 +105,7 @@
                                         <label for="" class="form-label">Endereco</label>
                                         <input type="text" name="endereco" value="{{old('endereco',$data->localizacao)}}" class="form-control">
                                         @if($errors->has('endereco'))
-                                        <span role="alert" class="text-danger">{{$errors->first('endereco')}}</span>
+                                            <span role="alert" class="text-danger">{{$errors->first('endereco')}}</span>
                                         @endif
                                     </div>
                                 </div>
@@ -146,9 +146,9 @@
                                     <div>
                                         <label class="form-label">Informação Adicional</label>
                                         <textarea class="form-control" name="descricao" value="{{old('descricao',$data->descricao)}}" rows="3">{{$data->descricao}}</textarea>
-                                    @if($errors->has('descricao'))
-                                        <span role="alert" class="text-danger">{{$errors->first('descricao')}}</span>
-                                    @endif
+                                        @if($errors->has('descricao'))
+                                            <span role="alert" class="text-danger">{{$errors->first('descricao')}}</span>
+                                        @endif
                                     </div>
                                 </div>
 
@@ -192,14 +192,17 @@
 
 @push('scripts')
     <script src="/back/dist/libs/jquery/jquery-3.6.0.min.js"></script>
-    
+    <script src="{{ asset('back/dist/libs/toastr/toastr.min.js')}}"></script>
+
+    <script src="/ckeditor/ckeditor.js"></script>
+
     <script>
         $(document).ready(function(){
 
             $('#editEmpresa').on('submit', function(e){
             
                 e.preventDefault();
-            // alert('success');
+                //alert('success');
                 var form = this;
                 $.ajax({
                     url:$(form).attr('action'),

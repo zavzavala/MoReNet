@@ -58,7 +58,6 @@
             </div>
         </div>
           @include('back.layouts.inc.footer')
-        
 
       </div>
     </div>

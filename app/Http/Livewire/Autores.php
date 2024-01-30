@@ -43,9 +43,9 @@ public $user_id;
         ],[
 
         ]);
-        //dd('User');
+        
         if($this->isOnline()){
-                //dd('success');
+           
             $default_pass = Random::generate(8);
 
             $autor = new User;
@@ -68,12 +68,14 @@ public $user_id;
             $autor_name = $this->nome;
 
             if($done){
+
                 Mail::send('new-user-email-template', $data, function($message) use ($autor_email, $autor_name){
-                    $message->from('zavzavala76@gmail.com', 'Zavala');
+                    $message->from('dtd.teste@inage.gov.mz', 'Facturacao');
                     $message->to($autor_email,$autor_name)->subject('Credenciais');
                 });
 
-                $this->dispatchBrowserEvent('Conta criada com sucesso', 'success');
+                $this->showToastr('Conta criada com sucesso', 'success');
+                //$this->dispatchBrowserEvent('Conta criada com sucesso', 'success');
                 $this->nome = $this->email = $this->username = $this->tipo = null;
                 $this->dispatchBrowserEvent('hide_modal_autor');
 
@@ -82,8 +84,8 @@ public $user_id;
             }
                     
         }else{
-                //dd('offline');
-        $this->showToastr('Esta offline, conecte-se a uma rede!', 'warning');
+            //dd('offline');
+            $this->showToastr('Esta offline, conecte-se a uma rede!', 'warning');
 
         }
     }
@@ -104,7 +106,7 @@ public $user_id;
 
     }
     public function editUser($autor){
-       //dd('ghjkl');
+       
         $this->dispatchBrowserEvent('ShowModalEdit_usuario');
         $this->user_id = $autor['id'];
         $this->nome= $autor['name'];
@@ -112,9 +114,11 @@ public $user_id;
         $this->email = $autor['email'];
         $this->tipo = $autor['type'];
         $this->blocked = $autor['blocked'];
+
     }
 
     public function updUser(){
+        
         $this->validate([
             'nome'=>'required',
             'username'=>'required|unique:users,username,'.$this->user_id,
@@ -122,15 +126,18 @@ public $user_id;
 
         ]);
         if($this->user_id){
+
             $autor = User::find($this->user_id);
 
             $autor->update([
                 'name'=>$this->nome,
                 'username'=>$this->username,
                 'email'=>$this->email,
-                'tipo'=>$this->tipo,
+                'type'=>$this->tipo,
                 'blocked'=>$this->blocked
+
             ]);
+
             $this->showToastr('Usuario actualizado com sucesso', 'success');
             $this->dispatchBrowserEvent('hide_edit_modal');
 
@@ -143,12 +150,17 @@ public $user_id;
         ]);
     }
     public function isOnline($site = "https://www.youtube.com/"){
+        
         if(@fopen($site, "r")){
+
             return true;
+
         }else{
 
             return false;
+
         }
+
     }
   
     public function render()
@@ -157,10 +169,12 @@ public $user_id;
             'autores'=>User::search(trim($this->search))
                         ->Where('id', '!=', auth()->id())->paginate($this->perpage),
         ]);
-       /*  return view('livewire.autores',[
+
+       /*return view('livewire.autores',[
             'autores' =>User::where('id', '!=',auth()->id())->paginate(4),
         ]); */
 
     }
+
     
 }

@@ -43,7 +43,7 @@
                                                 <tr class="odd gradeX">
                                                     
                                                     <td>
-                                                    <a data-bs-toggle="modal" id="detalhes" data-bs-target = "#detalhes{{$items['id']}}">
+                                                    <a data-bs-toggle="modal" id="detalhes" data-bs-target = "#detalhes{{$items->id}}">
                                                     <i title="Detalhes do registro" style=" color:blue; font-size:14px; margin-left:2px" class="fa fa-chevron-down"></i></a>
                                                               
                                                     {{$items->id}}</td>
@@ -58,11 +58,11 @@
                                                         <a style="color:blue;" href="<?= route('autor.empresa.relatorioIndividual', ['id'=>$items->id])  ?>" target="_blank"><i title="Emitir Relatorio" style="font-size: 22px;float: right; padding:0px 10px" class="fa fa-print"></i></a>
                                                         <!-- Detalhes do Registo -->
                                                                     
-                                                        <div class="modal fade" id="detalhes{{$items['id']}}" role="dialog">
+                                                        <div class="modal fade" id="detalhes{{$items->id}}" role="dialog">
                                                             <div class="modal-dialog modal-lg">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
-                                                                        <h5 class="modal-title" id="exampleModalLabel">Detalhes de : {{$items['id']}}<br>Registro Numero : {{$items['id']}}</h5>
+                                                                        <h5 class="modal-title" id="exampleModalLabel">Detalhes de : {{$items->id}}<br>Registro Numero : {{$items->id}}</h5>
                                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                     </div>
                                                                     <div class="modal-body">

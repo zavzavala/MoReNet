@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\empresa;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,3 +19,8 @@ Route::get('/', function () {
    // return view('welcome');
 });
 
+Route::get('/search',function () {
+    //$empresas = empresa::all();
+    $empresas = empresa::where('empresa')->get();
+    return $empresas;
+});

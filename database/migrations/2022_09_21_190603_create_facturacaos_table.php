@@ -20,19 +20,19 @@ class CreateFacturacaosTable extends Migration
             $table->foreignId('empresa_id')->constrained('empresas');
             $table->foreignId('user_id')->constrained('users');
             $table->integer('largura_banda_contratada')->default(0);
-            $table->integer('aumento_banda')->default(0);
+            $table->integer('aumento_banda')->nullable()->default(0);
             $table->decimal('preco_unitario');
             $table->decimal('banda_facturada')->default(0);
             $table->decimal('valor_facturado');
             $table->date('data_aumento_banda')->nullable();
-            $table->integer('diminuicao_banda')->default(0);
+            $table->integer('diminuicao_banda')->nullable()->default(0);
             $table->date('data_diminuicao_banda')->nullable();
             $table->string('comprovativo');
             $table->date('data_facturacao');
             $table->decimal('valor_pago')->default(0);
-            $table->decimal('credito');
-            $table->decimal('debito');
-            $table->decimal('divida');
+            $table->decimal('credito')->nullable()->default(0);
+            $table->decimal('debito')->nullable()->default(0);
+            $table->decimal('divida')->nullable()->default(0);
 
             $table->softDeletes();
             $table->timestamps();

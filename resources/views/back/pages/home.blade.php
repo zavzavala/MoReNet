@@ -15,7 +15,7 @@
                    
                 
                 </div>
-                <div class="panel-footer back-footer-green">
+                <div style="background-color:#006400; color:white" class="panel-footer back-footer-green">
                     Valor de Empresas Facturadas
 
                 </div>
@@ -29,8 +29,8 @@
 
                     <h3> <?= number_format("$debito", 2, ",", ".") == 0 ? "0" :number_format("$debito", 2,",",".") ?> Mzn </h3>
                 </div>
-                <div style="background-color:#db0610" class="panel-footer back-footer-red">
-                    Debito Total
+                <div style="background-color:#db0610;color:whitesmoke" class="panel-footer back-footer-red">
+                    Débito Total
 
                 </div>
             </div>
@@ -54,7 +54,7 @@
         <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Valores de Credito e Débito 
+                    Valores de Crédito e Débito 
                 </div>
                 <div class="panel-body">
 

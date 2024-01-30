@@ -1,2 +1,2 @@
--Ola <b>{{ $name}}
+-Ola,<b>{{ $name}}, 
     {!! $body_message!!}

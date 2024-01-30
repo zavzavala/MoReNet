@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 
 class AutorResetForm extends Component
 {
@@ -46,7 +47,7 @@ class AutorResetForm extends Component
                 ])->delete();
 
                 $success_token = Str::random(64);
-                session()->flash('success', 'Sua palavra-passe foi actualizada com sucesso. Faca Login com seu email (<span>'.$this->email.'</span>) e nova password');
+                session()->flash('success', 'Sua palavra-passe foi actualizada com sucesso. Faca Login com seu email (<span>'.$this->email.'</span>) e nova palavra-passe');
                     
                 $this->redirectRoute('autor.login', ['tkn'=>$success_token, 'UEmail'=>$this->email]);
                 

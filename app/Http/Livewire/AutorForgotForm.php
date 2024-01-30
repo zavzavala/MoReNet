@@ -33,7 +33,7 @@ class AutorForgotForm extends Component
                 ]);
                     $user = User::where('email',$this->email)->first();
                     $link = route('autor.reset-form',['token'=>$token,'email'=>$this->email]);
-                    $body_message = "Recebemos uma requisição de redifinição de palavra-passe do sistema deste email".
+                    $body_message = "Recebemos uma requisição de redifinição da palavra-passe do sistema deste email:<p></p>".
                     $this->email.".<br> pode redefinir clicando no link abaixo.";
                     $body_message.='<br>';
                     $body_message.='<a href="'.$link.'" target="_blank" style="color:#FFF;boder-color:#22bc66;border-style:solid;
@@ -42,12 +42,15 @@ class AutorForgotForm extends Component
                     $body_message.='<br>';
                     
                     $body_message.='Se não fez esta solicitação ignore este email.';
+                    $body_message.='<br>';
+                    $body_message.='Atenciosamente, Facturação';
+
                     $data = array(
                         'name' =>$user->name,
                         'body_message'=>$body_message,
                     );
                         Mail::send('forgot-email-template', $data, function($message) use ($user){
-                            $message->from('zava@gmail.com','Zavala');
+                            $message->from('dtd.teste@inage.gov.mz','Facturacao');
                             $message->to($user->email, $user->name)
                                         ->subject('Redefinir palavra-passe');
                         });

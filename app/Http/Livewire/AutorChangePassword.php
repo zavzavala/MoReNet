@@ -16,7 +16,7 @@ class AutorChangePassword extends Component
         'password'=>[
             'required', function($attribute,$value,$fail){
                     if(!Hash::check($value, User::find(auth('web')->id())->password)){
-                        return $fail(_('A Password actual esta incorrecta'));
+                        return $fail(_('A Palavra-passe actual esta incorrecta'));
                     
                     }
             }
@@ -30,10 +30,13 @@ class AutorChangePassword extends Component
     ]);
 
         if($query){
-                $this->showToastr('Palavra-passe alterada com sucesso.','success');
-                $this->password = $this->new_password = $this->conf_password = null;
+            $this->showToastr('Palavra-passe alterada com sucesso.','success');
+            $this->password = $this->new_password = $this->conf_password = null;
+
         }else{
-                $this->showToastr('Erro ao tentar alterar palavra-passe.','error');
+
+            $this->showToastr('Erro ao tentar alterar palavra-passe.','error');
+
         }
        
 

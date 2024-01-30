@@ -17,15 +17,15 @@ class AutorController extends Controller
         $data = DB::table('facturacaos')->get();
         /////////////////////////////////////////
         $meses_factura = DB::select(DB::raw('select MONTHNAME (data_facturacao) as mes,
-                                    format(sum(valor_facturado),2,\'de_DE\') as total
-                                        from facturacaos
-                                            group by mes'));
+            format(sum(valor_facturado),2,\'de_DE\') as total
+                from facturacaos
+                    group by mes'));
         ////////////////////////////////////
 
         $facturado = $data->sum('valor_facturado');
         $debito = $data->sum('debito');
  
-      /*   $mes_credito = DB::select(DB::raw('select monthname(data_facturacao) as mes_credito,
+        /*$mes_credito = DB::select(DB::raw('select monthname(data_facturacao) as mes_credito,
                                         format(sum(credito), 2, \'de_DE\') as total_credito
                                         from facturacaos group by mes_credito')); */
 

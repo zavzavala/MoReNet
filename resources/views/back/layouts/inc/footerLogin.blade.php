@@ -17,7 +17,8 @@
               </div> -->
               <div class="col-12 col-lg-auto mt-3 mt-lg-0">
                 <ul class="list-inline list-inline-dots mb-0">
-                  
+                  <a href="." class="navbar-brand navbar-brand-autodark"><img src="./back/static/logoMN.jpeg" height="36" alt="Logo "></a>
+
                   <li class="list-inline-item">
                     Copyright &copy; {{NOW()}}
                     

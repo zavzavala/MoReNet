@@ -122,9 +122,9 @@ final class tbl_empresas extends PowerGridComponent
     public function columns(): array
     {
         return [
-            Column::make('ID', 'id')
-                ->makeInputRange(),
-
+            /*  Column::make('ID', 'id')
+                    ->makeInputRange(),
+ */
             Column::make('EMPRESA', 'empresa')
                 ->sortable()
                 ->searchable()
@@ -135,38 +135,38 @@ final class tbl_empresas extends PowerGridComponent
                 ->searchable()
                 ->makeInputText(),
 
-            Column::make('EMAIL', 'email')
+            /* Column::make('EMAIL', 'email')
                 ->sortable()
                 ->searchable()
                 ->makeInputText(),
-
-            Column::make('LOCALIZACAO', 'localizacao')
+ */
+           /*  Column::make('LOCALIZACAO', 'localizacao')
                 ->sortable()
                 ->searchable()
-                ->makeInputText(),
+                ->makeInputText(), */
 
             Column::make('DATA CONTRATO', 'data_contrato_formatted', 'data_contrato')
                 ->searchable()
                 ->sortable()
                 ->makeInputDatePicker(),
 
-            Column::make('NUIT', 'nuit')
-                ->makeInputRange(),
+           /*  Column::make('NUIT', 'nuit')
+                ->makeInputRange(), */
 
-            Column::make('DESCRICAO', 'descricao')
+           /*  Column::make('DESCRICAO', 'descricao')
                 ->sortable()
                 ->searchable()
-                ->makeInputText(),
+                ->makeInputText(), */
 
             Column::make('TIPO EMPRESA', 'tipo_empresa')
                 ->sortable()
                 ->searchable()
                 ->makeInputText(),
 
-            Column::make('URL', 'url')
+           /*  Column::make('URL', 'url')
                 ->sortable()
                 ->searchable()
-                ->makeInputText(),
+                ->makeInputText(), */
 
           /*   Column::make('CREATED AT', 'created_at_formatted', 'created_at')
                 ->searchable()
@@ -200,7 +200,7 @@ final class tbl_empresas extends PowerGridComponent
     public function actions(): array
     {
         return [
-            Button::make('edit', 'Edit')
+           /*  Button::make('edit', 'Edit')
             ->class('bg-indigo-500 cursor-pointer text-blue px-3 py-2.5 m-1 rounded text-sm')
             //->route('editEmpresa', ['empresa' => 'id']),
             ->route('autor.empresas.edit', ['empresa' => 'id']),
@@ -208,7 +208,7 @@ final class tbl_empresas extends PowerGridComponent
             Button::make('destroy', 'Delete')
             ->class('bg-red-500 cursor-pointer text-red px-3 py-2 m-1 rounded text-sm id="deletefactura"' )
             ->route('autor.empresas.destroy', ['empresa' => 'id'])
-            ->method('delete')
+            ->method('delete') */
 
         ];
         

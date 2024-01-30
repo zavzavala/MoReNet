@@ -8,7 +8,7 @@
             <div class="row align-items-center">
               <div class="col">
                 <h2 class="page-title">
-                  Servicos
+                  Serviços
                 </h2>
               </div>
             </div>

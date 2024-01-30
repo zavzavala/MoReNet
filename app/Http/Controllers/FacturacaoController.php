@@ -15,19 +15,35 @@ class FacturacaoController extends Controller
   
     public function index()
     {
+        
         return view('back.pages.empresa');
     }
 
     
     public function create()
     {
-        return view('back.pages.empresa');
+
+        $data = DB::table('empresas')
+            ->whereNull('deleted_at')->get();
+                //dd($data);
+        return view('back.pages.facturacao', compact('data'));
+
     }
 
    
+    public function Buscar_Largura_Banda(Request $request){
+
+        $l_banda = $request->input('valor_selecionado');
+
+        // Aqui Recupera-se os dados do banco de dados com base no valor selecionado
+        $dados = empresa::where('id', $l_banda)->get();
+         
+        return response()->json($dados);
+
+    }
     public function store(Request $request)
     {
-        
+      
         $objCdastra = new facturacao();
 
         $validator = Validator::make($request->all(),[
@@ -36,20 +52,19 @@ class FacturacaoController extends Controller
             'preco_unitario' => 'required',
             'banda_facturada' => 'required',
             'valor_facturado' => 'required',
-            'aumento_banda' => 'required',
-            'diminuicao_banda' => 'required',
+            //'aumento_banda' => 'required',
+            //'diminuicao_banda' => 'required',
             'comprovativo' => 'required',
             'data_facturacao' => 'required',
             'valor_pago' => 'required',
-            'credito' => 'required',
-            'debito' => 'required',     
-
+            //'credito' => 'required',
+            //'debito' => 'required',     
+ 
         ],
         [
             'cliente.required' => 'Selecione uma instituicao',
-            'largura_banda_contratada.required' => 'Este campo é obrigatòrio',
 
-            'aumento_banda.required' => 'Este campo é obrigatòrio',
+            'largura_banda_contratada.required' => 'Este campo é obrigatòrio',
 
             'preco_unitario.required' => 'Este campo é obrigatòrio',
 
@@ -59,11 +74,6 @@ class FacturacaoController extends Controller
 
             'diminuicao_banda.required' => 'Este campo é obrigatòrio',
 
-            'debito.required' => 'Este campo é obrigatòrio',
-
-            'divida.required' => 'Este campo é obrigatòrio',
-
-            'credito.required' => 'Este campo é obrigatòrio',
             'data_facturacao.required' => 'Este campo é obrigatòrio',
 
             'comprovativo.required' => 'Este campo é obrigatòrio',
@@ -77,8 +87,10 @@ class FacturacaoController extends Controller
         }else{
 
             if($request->largura_banda_contratada < $request->diminuicao_banda){
+
                 return back()->with('warning','Erro. A Banda Facturada não pode ser menor que a diminuição da Banda!');
                 //return response()->json(['code'=>0, 'msg'=>'Erro. A Banda Facturada não pode ser menor que a diminuição da Banda!']);
+           
             }else{
 
                 
@@ -104,11 +116,11 @@ class FacturacaoController extends Controller
                 if($objCdastra){
 
                     //return response()->json(['code'=>1, 'msg'=>'Registro salvo com sucesso!']);
-                    return back()->with('success', 'Registro salvo com sucesso!');
+                    return back()->with('success', 'Facturado com sucesso!');
 
                 }else{
 
-                    return back()->with('error', 'Erro ao tentar salvar registro!');
+                    return back()->with('error', 'Erro ao tentar Facturar empresa!');
 
                 }
             }
@@ -279,7 +291,7 @@ class FacturacaoController extends Controller
 
     }
     public function buscarDadosFacturacao(Request $request){
-       
+       //dd('dfghjkl;');
         if($request->tipo != ''){
             
             $empresas = DB::table('empresas')
@@ -318,8 +330,13 @@ class FacturacaoController extends Controller
     }
     public function buscarDados(Request $request){
    
+        $empresas = DB::table('empresas')
+        ->select('*')
+        ->where('id', '=', $request->empresa)->get();
+        $total_empresas = $empresas->count();
         if($request->AndOr == 'AND'){
-
+            
+            //Pesquisa somente dados da empresa
             $date = \Carbon\Carbon::today()->subDays($request->semestre);
             $data = DB::table('empresas')
             ->join('facturacaos', 'empresas.id', '=', 'facturacaos.empresa_id')
@@ -328,15 +345,17 @@ class FacturacaoController extends Controller
             'facturacaos.banda_facturada', 'facturacaos.valor_pago as Valor_pago', 'facturacaos.valor_facturado as valor_facturado', 'facturacaos.aumento_banda as aumento', 
             'facturacaos.diminuicao_banda as total_diminuicao')
                 ->where('empresas.id', '=', $request->empresa)
-                ->where('facturacaos.data_facturacao','>=' ,$date)
+                ->where('facturacaos.data_facturacao','>=', $date)
                 //->sum('valor_facturado')
             ->groupBy('empresas.empresa', 'facturacaos.comprovativo', 'facturacaos.debito', 
             'facturacaos.credito', 'facturacaos.divida', 'total_contratada', 
             'facturacaos.banda_facturada', 'Valor_pago', 'valor_facturado', 'aumento', 
             'total_diminuicao')->get();
+            //dd($data);
 
         }else{
-
+            
+            //Pesquisa dados de todas empresas
             $date = \Carbon\Carbon::today()->subDays($request->semestre);
             $data = DB::table('empresas')
             ->join('facturacaos', 'empresas.id', '=', 'facturacaos.empresa_id')
@@ -345,12 +364,14 @@ class FacturacaoController extends Controller
             'facturacaos.banda_facturada', 'facturacaos.valor_pago as Valor_pago', 'facturacaos.valor_facturado as valor_facturado', 'facturacaos.aumento_banda as aumento', 
             'facturacaos.diminuicao_banda as total_diminuicao')
                 ->where('empresas.id', '=', $request->empresa)
-                ->Orwhere('facturacaos.data_facturacao', '>=',$date)
+                ->Orwhere('facturacaos.data_facturacao', '>=', $date)
                 //->sum('valor_facturado')
                 ->groupBy('empresas.empresa', 'facturacaos.comprovativo', 'facturacaos.debito', 
             'facturacaos.credito', 'facturacaos.divida', 'total_contratada', 
             'facturacaos.banda_facturada', 'Valor_pago', 'valor_facturado', 'aumento', 
             'total_diminuicao')->get();
+
+            //dd($data);
 
         }
        
@@ -359,8 +380,8 @@ class FacturacaoController extends Controller
         $total_debido = $data->sum('debido');
         $total_credito = $data->sum('credito');
 
-     
-        return view('back.pages.printers.facturacao', compact('data','total_valor_facturado','total_divida','total_debido','total_credito'));
+    
+        return view('back.pages.printers.facturacao', compact('data','total_empresas','empresas','total_valor_facturado','total_divida','total_debido','total_credito'));
 
     }
     public function empresas(){
@@ -424,18 +445,59 @@ class FacturacaoController extends Controller
     }
 
     public function geral(){
+ 
+    
+         
         $data = DB::table('facturacaos')
-        ->join('empresas', 'facturacaos.empresa_id', '=', 'facturacaos.id')
-        ->select('empresas.empresa', 'facturacaos.debito', 
-        'facturacaos.credito', 'facturacaos.largura_banda_contratada as banda_contratada', 
-        'facturacaos.valor_facturado as valor_facturado', 
-        'facturacaos.aumento_banda as banda_aumento', 
-        'facturacaos.diminuicao_banda as diminuicao_banda')
-            ->where('empresas.deleted_at', '=', Null)
-            ->where('facturacaos.deleted_at', '=', Null)
-           ->get();
-            dd($data);
+            ->join('empresas', 'facturacaos.empresa_id', '=', 'empresas.id') // Faz o join das tabelas
+            ->select(
+            'facturacaos.comprovativo',
+                'empresas.empresa',
+                'facturacaos.debito',
+                'facturacaos.credito',
+                'facturacaos.largura_banda_contratada as banda_contratada',
+                'facturacaos.valor_facturado as valor_facturado',
+                'facturacaos.valor_pago as valor_pago',
+                'facturacaos.aumento_banda as banda_aumento',
+                'facturacaos.diminuicao_banda as diminuicao_banda',
+                'facturacaos.divida as divida',
+                'facturacaos.data_facturacao as data'
+            )
+            ->where('facturacaos.divida', '>', 0) // Empresas individadas
+        ->get();  
+
+        return view('back.pages.consultas.dividas', compact('data'));
+
 
     }
+
+    public function ByEmpresa(Request $request){
+
+    
+        $SomaDividas = DB::table('facturacaos')
+            ->join('empresas', 'facturacaos.empresa_id', '=', 'empresas.id')
+                ->select(
+                    
+                    //'facturacaos.comprovativo',
+                    'empresas.empresa',
+                    
+                    DB::raw('SUM(facturacaos.divida) as divida') // Soma as dividas
+                    
+                )
+            ->where('facturacaos.divida', '>', 0)
+                //->groupBy('facturacaos.comprovativo')
+                ->groupBy('empresas.empresa') // Ordenar PorEmpresa
+                 
+                //->groupBy('facturacaos.data_facturacao as data')
+                
+        ->get();
+        
+
+        //dd($SomaDividas);
+        return view('back.pages.consultas.dividas', compact('SomaDividas'));
+    
+    
+    }
+
 
 }
