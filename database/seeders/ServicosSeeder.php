@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illmuniate\Support\Facades\DB;
 
 class ServicosSeeder extends Seeder
 {

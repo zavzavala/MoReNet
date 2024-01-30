@@ -5,7 +5,9 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
-use DB;
+use Illuminate\Support\Facades\DB;
+
+
 use Carbon;
 
 class UserSeeder extends Seeder
@@ -17,8 +19,8 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        \DB::table('users')->delete();
-        \DB::table('users')->insert([
+        DB::table('users')->delete();
+        DB::table('users')->insert([
             'name' => 'Admin',
             'username' => 'Administrator',
             'email' => 'admin@gmail.com',
