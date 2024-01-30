@@ -41,7 +41,9 @@ class AutorController extends Controller
             //$data = [];
             //$data_mes_credito = $mes_credito;
 
-           
+            $dat_credito = [];
+            $dat_debito = [];
+
             foreach($mes_credito as $dat_creditos){
                 $dat_credito = $dat_creditos;
             }
@@ -51,7 +53,7 @@ class AutorController extends Controller
                 $dat_debito = $dat_debitos;
             }   
         
-        //dd($dat_credito);
+        dd($dat_credito);
 
         return view('back.pages.home', compact('facturado', 'debito', 'meses_factura', 'dat_credito','dat_debito'));
         
