@@ -30,30 +30,54 @@ class AutorController extends Controller
                                         from facturacaos group by mes_credito')); */
 
                                         
-        $mes_debito = DB::select(DB::raw('select monthname(data_facturacao) as mes_debito,
+       /*  $mes_debito = DB::select(DB::raw('select monthname(data_facturacao) as mes_debito,
             sum(debito) as total_debito from facturacaos group by mes_debito'));
+ */
 
-        $mes_credito = DB::table('facturacaos')
+        ///Usando Eloquent
+        $data_debito = DB::table('facturacaos')
+            ->selectRaw('MONTHNAME(data_facturacao) as mes_debito, SUM(debito) as total_debito')
+                ->groupBy('mes_debito')
+                    ->get();
+
+                    $dat_debito = [];
+                    foreach ($data_debito as $item) {
+                        $dat_debito[] = [
+                            'mes_debito' => $item->mes_debito,
+                            'total_debito' => $item->total_debito,
+                        ];
+                    }
+                
+        /* $mes_credito = DB::table('facturacaos')
         ->selectRaw('MONTHNAME(data_facturacao) as mes_credito,sum(credito) as total_credito')
        
         ->groupBy('mes_credito')
-        ->get();
-            //$data = [];
-            //$data_mes_credito = $mes_credito;
+        ->get(); */
+           
+        $data_credito = DB::table('facturacaos')
+            ->selectRaw('MONTHNAME(data_facturacao) as mes_credito, SUM(credito) as total_credito')
+                ->groupBy('mes_credito')
+                    ->get();
+                    $dat_credito = [];
+                    foreach ($data_credito as $item) {
+                        $dat_credito[] = [
+                            'mes_credito' => $item->mes_credito,
+                            'total_credito' => $item->total_credito,
+                        ];
+                    }
+                
+                    //dd($dat_credito);
+            
 
-            $dat_credito = [];
-            $dat_debito = [];
-
-            foreach($mes_credito as $dat_creditos){
-                $dat_credito = $dat_creditos;
+           /*  foreach($mes_credito as $dat_creditos){
+               
             }
 
-            
+            //$dat_credito = $mes_credito[];
             foreach($mes_debito as $dat_debitos){
-                $dat_debito = $dat_debitos;
-            }   
-        
-        dd($dat_credito);
+            }  */  
+            
+        //dd($dat_debito);
 
         return view('back.pages.home', compact('facturado', 'debito', 'meses_factura', 'dat_credito','dat_debito'));
         

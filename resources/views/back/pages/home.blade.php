@@ -82,8 +82,8 @@
 		var data = google.visualization.arrayToDataTable([
 				[ 'Valor Credito', 'Valor Débito' ], 
                
-                [ 'Valor Credito', <?= $dat_credito->total_credito ?>],
-				[ 'Valor Débito', <?= $dat_debito->total_debito ?>]
+                [ 'Valor Credito', <?= $dat_credito[0]['total_credito'] ?>],
+				[ 'Valor Débito', <?= $dat_debito[0]['total_debito'] ?>]
             
             ]);
 
