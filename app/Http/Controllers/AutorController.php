@@ -40,14 +40,14 @@ class AutorController extends Controller
                 ->groupBy('mes_debito')
                     ->get();
 
-                    $dat_debito = [];
+                    $dat_debitos = [];
                     foreach ($data_debito as $item) {
-                        $dat_debito[] = [
+                        $dat_debitos[] = [
                             'mes_debito' => $item->mes_debito,
                             'total_debito' => $item->total_debito,
                         ];
                     }
-                
+                $dat_debito = $dat_debitos[0];
         /* $mes_credito = DB::table('facturacaos')
         ->selectRaw('MONTHNAME(data_facturacao) as mes_credito,sum(credito) as total_credito')
        
@@ -58,26 +58,18 @@ class AutorController extends Controller
             ->selectRaw('MONTHNAME(data_facturacao) as mes_credito, SUM(credito) as total_credito')
                 ->groupBy('mes_credito')
                     ->get();
-                    $dat_credito = [];
-                    foreach ($data_credito as $item) {
-                        $dat_credito[] = [
-                            'mes_credito' => $item->mes_credito,
-                            'total_credito' => $item->total_credito,
-                        ];
-                    }
-                
-                    //dd($dat_credito);
-            
 
-           /*  foreach($mes_credito as $dat_creditos){
+        $dat_creditos = [];
+        foreach ($data_credito as $item) {
+            $dat_creditos[] = [
+                'mes_credito' => $item->mes_credito,
+                'total_credito' => $item->total_credito,
+            ];
+        }
+        $dat_credito = $dat_creditos[0];
                
-            }
-
-            //$dat_credito = $mes_credito[];
-            foreach($mes_debito as $dat_debitos){
-            }  */  
             
-        //dd($dat_debito);
+        //dd($dat_debito['mes_debito']);
 
         return view('back.pages.home', compact('facturado', 'debito', 'meses_factura', 'dat_credito','dat_debito'));
         
