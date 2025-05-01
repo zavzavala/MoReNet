@@ -32,7 +32,7 @@ class AutorController extends Controller
                                         
        /*  $mes_debito = DB::select(DB::raw('select monthname(data_facturacao) as mes_debito,
             sum(debito) as total_debito from facturacaos group by mes_debito'));
- */
+        */
 
         ///Usando Eloquent
         $data_debito = DB::table('facturacaos')
@@ -47,7 +47,7 @@ class AutorController extends Controller
                             'total_debito' => $item->total_debito,
                         ];
                     }
-                $dat_debito = $dat_debitos[0];
+                //$dat_debito = $dat_debitos[0];Este foi modificadono dia 18/julho/2024, na Santa Isabel
         /* $mes_credito = DB::table('facturacaos')
         ->selectRaw('MONTHNAME(data_facturacao) as mes_credito,sum(credito) as total_credito')
        
@@ -66,10 +66,15 @@ class AutorController extends Controller
                 'total_credito' => $item->total_credito,
             ];
         }
-        $dat_credito = $dat_creditos[0];
-               
-            
-        //dd($dat_debito['mes_debito']);
+        //$dat_credito = $dat_creditos[0];Este foi modificadono dia 18/julho/2024, na Santa Isabel. NB:Assim ele so pega um registo, idem para debitos
+        $dat_debito = $dat_debitos;
+        $dat_credito = $dat_creditos;
+        //dd($dat_debitos);
+        //dd($dat_creditos);
+
+
+        //dd($dat_credito['total_credito']);
+        //dd($dat_debito['total_debito']);
 
         return view('back.pages.home', compact('facturado', 'debito', 'meses_factura', 'dat_credito','dat_debito'));
         
