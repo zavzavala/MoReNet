@@ -13,7 +13,7 @@
                 <div class="col-md-6 col-xl-6 text-md-right">
                     <div class="mt-4 mt-md-0">
                         <div class="btn-group mb-3 mb-sm-0">
-                            <button type="button" class="btn btn-primary" onclick="history.back()"><i data-feather="arrow-left-circle" class="mr-2"></i>Voltar</button>
+                            <button class="btn btn-primary" onclick="history.back()"><i data-feather="arrow-left-circle" class="mr-2"></i>Voltar</button>
                         </div>
 
                     </div>

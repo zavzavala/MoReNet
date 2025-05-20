@@ -15,25 +15,18 @@ class AutorController extends Controller
     public function index(Request $request){
 
         $data = DB::table('facturacaos')->get();
-        /////////////////////////////////////////
-        $meses_factura = DB::select(DB::raw('select MONTHNAME (data_facturacao) as mes,
-            format(sum(valor_facturado),2,\'de_DE\') as total
-                from facturacaos
-                    group by mes'));
+
+    
+    
+        $meses_factura = DB::table('facturacaos')
+            ->selectRaw('MONTHNAME(data_facturacao) as mes, SUM(valor_facturado) as total')
+                ->groupBy('data_facturacao')->get();
         ////////////////////////////////////
 
         $facturado = $data->sum('valor_facturado');
         $debito = $data->sum('debito');
  
-        /*$mes_credito = DB::select(DB::raw('select monthname(data_facturacao) as mes_credito,
-                                        format(sum(credito), 2, \'de_DE\') as total_credito
-                                        from facturacaos group by mes_credito')); */
-
-                                        
-       /*  $mes_debito = DB::select(DB::raw('select monthname(data_facturacao) as mes_debito,
-            sum(debito) as total_debito from facturacaos group by mes_debito'));
-        */
-
+   
         ///Usando Eloquent
         $data_debito = DB::table('facturacaos')
             ->selectRaw('MONTHNAME(data_facturacao) as mes_debito, SUM(debito) as total_debito')
@@ -47,13 +40,7 @@ class AutorController extends Controller
                             'total_debito' => $item->total_debito,
                         ];
                     }
-                //$dat_debito = $dat_debitos[0];Este foi modificadono dia 18/julho/2024, na Santa Isabel
-        /* $mes_credito = DB::table('facturacaos')
-        ->selectRaw('MONTHNAME(data_facturacao) as mes_credito,sum(credito) as total_credito')
-       
-        ->groupBy('mes_credito')
-        ->get(); */
-           
+     
         $data_credito = DB::table('facturacaos')
             ->selectRaw('MONTHNAME(data_facturacao) as mes_credito, SUM(credito) as total_credito')
                 ->groupBy('mes_credito')

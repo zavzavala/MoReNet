@@ -8,7 +8,7 @@
         }
     }
 
-    @if(isBootstrap5())
+    @if (config('livewire-powergrid.theme') === 'tailwind')
     livewire.hook('message.processed', (message, component) => {
         const multi_selects = $("div[wire\\:id='"+component.id+"']").find("select[x-ref^='select_picker_']");
         multi_selects.map(function () {
@@ -29,7 +29,7 @@
     <script src="{{ config('livewire-powergrid.plugins.flatpickr.js') }}"></script>
 @endif
 
-@if(isBootstrap5() && filled(config('livewire-powergrid.plugins.bootstrap-select.js')))
+@if (config('livewire-powergrid.theme') === 'tailwind')
     <script src="{{ config('livewire-powergrid.plugins.bootstrap-select.js') }}" crossorigin="anonymous"></script>
 @endif
 

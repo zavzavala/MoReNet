@@ -48,7 +48,7 @@ final class tbl_empresas extends PowerGridComponent
     *
     * @return Builder<\App\Models\empresa>
     */
-    public function datasource(): Builder
+    public function datasource()
     {
         return empresa::query();
     }
@@ -124,16 +124,16 @@ final class tbl_empresas extends PowerGridComponent
         return [
             /*  Column::make('ID', 'id')
                     ->makeInputRange(),
- */
+            */
             Column::make('EMPRESA', 'empresa')
                 ->sortable()
-                ->searchable()
-                ->makeInputText(),
+                ->searchable(),
+                
 
             Column::make('TELEFONE', 'telefone')
                 ->sortable()
-                ->searchable()
-                ->makeInputText(),
+                ->searchable(),
+                
 
             /* Column::make('EMAIL', 'email')
                 ->sortable()
@@ -145,10 +145,10 @@ final class tbl_empresas extends PowerGridComponent
                 ->searchable()
                 ->makeInputText(), */
 
-            Column::make('DATA CONTRATO', 'data_contrato_formatted', 'data_contrato')
+            Column::add('DATA CONTRATO', 'data_contrato_formatted', 'data_contrato')
                 ->searchable()
-                ->sortable()
-                ->makeInputDatePicker(),
+                ->sortable(),
+                //->makeInputDatePicker(),
 
            /*  Column::make('NUIT', 'nuit')
                 ->makeInputRange(), */
@@ -161,7 +161,7 @@ final class tbl_empresas extends PowerGridComponent
             Column::make('TIPO EMPRESA', 'tipo_empresa')
                 ->sortable()
                 ->searchable()
-                ->makeInputText(),
+              ,
 
            /*  Column::make('URL', 'url')
                 ->sortable()

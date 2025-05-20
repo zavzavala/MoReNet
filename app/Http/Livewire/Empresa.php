@@ -51,7 +51,7 @@ class Empresa extends Component
     }
 
     public function store(Request $request){
-      dd($request->all());
+      //dd($request->all());
         //dd($this->desc_doc, $this->doc);
    
         

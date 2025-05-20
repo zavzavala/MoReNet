@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="{{ config('livewire-powergrid.plugins.flatpickr.css') }}">
 @endif
 
-@if(isBootstrap5() && filled(config('livewire-powergrid.plugins.bootstrap-select.css')))
+@if (config('livewire-powergrid.theme') === 'tailwind')
     <link rel="stylesheet" href="{{ config('livewire-powergrid.plugins.bootstrap-select.css') }}" crossorigin="anonymous"/>
 @endif
 

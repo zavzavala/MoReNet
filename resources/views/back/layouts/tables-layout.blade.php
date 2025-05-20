@@ -1,14 +1,6 @@
 
 <!doctype html>
-<!--
-* Tabler - Premium and Open Source dashboard template with responsive and high quality UI.
-* @version 1.0.0-beta5
-* @link https://tabler.io
-* Copyright 2018-2022 The Tabler Authors
-* Copyright 2018-2022 codecalm.net Paweł Kuna
-* Licensed under MIT (https://github.com/tabler/tabler/blob/master/LICENSE)
--->
-<html lang="en">
+<html lang="pt-Pt">
   <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
@@ -18,9 +10,6 @@
     
     <!-- CSS files -->
     <base href="/">
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-     -->
-    <!-- <script src="{{ asset('back/css/bootstrap.css') }}"></script> -->
 
     <link href="./back/dist/css/tabler.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="{{ asset('back/dist/libs/toastr/toastr.min.css')}}">
@@ -36,7 +25,7 @@
 
     @stack('stylesheets')
     @livewireStyles
-    @powerGridStyles
+   <!--  @powerGridStyles -->
     <link href="/back/dist/css/demo.min.css" rel="stylesheet"/>
     <style>
       .swal2-popup{
@@ -86,7 +75,7 @@
 
     @stack('scripts')
     @livewireScripts
-    @powerGridScripts
+    <!-- @powerGridScripts -->
     <script>
        
      
